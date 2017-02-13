@@ -1,4 +1,4 @@
-package JSON;
+package edu.cmu.JSON;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,17 +6,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class LoginJSON {
 	private String message;
-	private List<String> menu;
+	private List<String> links;
 	public LoginJSON() {
 		
 	}
 	public LoginJSON(String message) {
 		this.message = message;
-		this.menu = new ArrayList<>();
+		this.links = new ArrayList<>();
 	}
-	public LoginJSON(String message, List<String> menu) {
+	public LoginJSON(String message, List<String> links) {
 		this.message = message;
-		this.menu = menu;
+		this.links = links;
 	}
 	public String getMessage() {
 		return message;
@@ -24,11 +24,11 @@ public class LoginJSON {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	public List<String> getMenu() {
-		return menu;
+	public List<String> getLinks() {
+		return links;
 	}
-	public void setMenu(List<String> menu) {
-		this.menu = menu;
+	public void setLinks(List<String> links) {
+		this.links = links;
 	}
 
 }

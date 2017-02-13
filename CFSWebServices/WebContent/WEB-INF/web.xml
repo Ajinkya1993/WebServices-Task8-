@@ -6,7 +6,7 @@
      <!-- Register resources and providers under com.vogella.jersey.first package. -->
     <init-param>
         <param-name>jersey.config.server.provider.packages</param-name>
-        <param-value>service</param-value>
+        <param-value>edu.cmu.service</param-value>
     </init-param>
     <init-param>
           <param-name>    jdbcDriverName          </param-name> 
