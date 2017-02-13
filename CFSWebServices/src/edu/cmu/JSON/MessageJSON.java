@@ -2,12 +2,12 @@ package edu.cmu.JSON;
 
 import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
-public class LoginJSON {
+public class MessageJSON {
 	private String message;
-	public LoginJSON() {
+	public MessageJSON() {
 		
 	}
-	public LoginJSON(String message) {
+	public MessageJSON(String message) {
 		this.message = message;
 	}
 	

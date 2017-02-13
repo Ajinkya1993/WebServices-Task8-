@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.genericdao.RollbackException;
 
 import edu.cmu.model.EmployeeDAO;
-import edu.cmu.JSON.LoginJSON;
+import edu.cmu.JSON.MessageJSON;
 import edu.cmu.databean.CustomerBean;
 import edu.cmu.databean.EmployeeBean;
 import edu.cmu.formbean.LoginFormBean;
@@ -30,17 +30,17 @@ public class LoginAction {
 	public String getName() {
 		return "login";
 	}
-	public LoginJSON perform (HttpServletRequest request) throws RollbackException {
+	public MessageJSON perform (HttpServletRequest request) throws RollbackException {
 			String message = "";
 			HttpSession session = request.getSession();
 			List<String> errors = new ArrayList<String>();
-			LoginJSON loginJSON = new LoginJSON();
+			MessageJSON loginJSON = new MessageJSON();
 	
 			// normal validation check
 			errors = loginFormBean.getValidationErrors();
 			if (errors.size() > 0) {
 				message = "There seems to be an issue with the username/password combination that you entered";
-				return new LoginJSON(message);
+				return new MessageJSON(message);
 			}
 			
 			// Checking if customer has logged in
@@ -52,11 +52,11 @@ public class LoginAction {
 					session.setAttribute("user", customer);
 					session.setAttribute("userType", "customer");
 					message = "Welcome " + customer.getFirstName();
-					loginJSON = new LoginJSON(message);
+					loginJSON = new MessageJSON(message);
 					return loginJSON;
 				} else {
 					message = "There seems to be an issue with the username/password combination that you entered";
-					loginJSON = new LoginJSON(message);
+					loginJSON = new MessageJSON(message);
 				}
 			}
 			// Checking if employee has logged in
@@ -66,18 +66,18 @@ public class LoginAction {
 					session.setAttribute("user", employee);
 					session.setAttribute("userType", "employee");
 					message = "Welcome " + employee.getFirstName();
-					loginJSON = new LoginJSON(message);
+					loginJSON = new MessageJSON(message);
 					return loginJSON;
 				} else {
 					message = "There seems to be an issue with the username/password combination that you entered";
-					loginJSON = new LoginJSON(message);
+					loginJSON = new MessageJSON(message);
 				}
 			}
 			// Checking if user name and password doesn't match for both employee
 			// and customer
 			if (employee == null && customer == null) {
 				message = "There seems to be an issue with the username/password combination that you entered";
-				loginJSON = new LoginJSON(message);
+				loginJSON = new MessageJSON(message);
 				return loginJSON;
 			}
 			return loginJSON;

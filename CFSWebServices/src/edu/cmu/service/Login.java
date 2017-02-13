@@ -13,7 +13,7 @@ import org.genericdao.RollbackException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import edu.cmu.JSON.LoginJSON;
+import edu.cmu.JSON.MessageJSON;
 import edu.cmu.formbean.LoginFormBean;
 import edu.cmu.model.Model;
 import edu.cmu.resource.Controller;
@@ -23,7 +23,7 @@ import edu.cmu.resource.LoginAction;
 public class Login {	
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
-	public LoginJSON login(@Context HttpServletRequest request, String jsonString) throws ServletException, JSONException {
+	public MessageJSON login(@Context HttpServletRequest request, String jsonString) throws ServletException, JSONException {
 		try {
 			
 			JSONObject obj = new JSONObject (jsonString);
@@ -33,14 +33,8 @@ public class Login {
 			Model model = controller.getModel();
 			return new LoginAction(loginFormBean, model).perform(request);
 			
-		} catch (JSONException j){
-			LoginJSON loginJSON = new LoginJSON("There seems to be an issue with the username/password combination that you entered");
-			return loginJSON;
-		} catch (ServletException s) {
-			LoginJSON loginJSON = new LoginJSON("There seems to be an issue with the username/password combination that you entered");
-			return loginJSON;
-		} catch (RollbackException e) {
-			LoginJSON loginJSON = new LoginJSON("There seems to be an issue with the username/password combination that you entered");
+		} catch (Exception e){
+			MessageJSON loginJSON = new MessageJSON("There seems to be an issue with the username/password combination that you entered");
 			return loginJSON;
 		} 
 	} 
