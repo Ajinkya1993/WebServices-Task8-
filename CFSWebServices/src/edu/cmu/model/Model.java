@@ -29,8 +29,11 @@ public class Model {
 
     public Model(ServletConfig config) throws ServletException, RollbackException {
         try {
-            String jdbcDriver = config.getInitParameter("jdbcDriver");
-            String jdbcURL = config.getInitParameter("jdbcURL");
+            //String jdbcDriver = config.getInitParameter("jdbcDriver");
+            //String jdbcURL = config.getInitParameter("jdbcURL");
+        	
+        	String jdbcDriver = "com.mysql.jdbc.Driver";
+            String jdbcURL = "jdbc:mysql:///test";
 
             ConnectionPool pool = new ConnectionPool(jdbcDriver, jdbcURL);
 
