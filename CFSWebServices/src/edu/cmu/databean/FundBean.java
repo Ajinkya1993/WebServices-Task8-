@@ -9,6 +9,15 @@ public class FundBean {
 	private int fundId;
 	private String name;
 	private String symbol;
+	private double price;
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
 
 	public int getFundId() {
 		return fundId;
