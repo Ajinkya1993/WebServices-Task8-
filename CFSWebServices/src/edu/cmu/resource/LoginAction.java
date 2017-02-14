@@ -35,7 +35,7 @@ public class LoginAction {
 			HttpSession session = request.getSession();
 			List<String> errors = new ArrayList<String>();
 			MessageJSON loginJSON = new MessageJSON();
-	
+
 			// normal validation check
 			errors = loginFormBean.getValidationErrors();
 			if (errors.size() > 0) {
