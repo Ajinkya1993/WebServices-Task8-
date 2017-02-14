@@ -6,54 +6,38 @@ import java.util.List;
 import org.mybeans.form.FormBean;
 
 public class RequestCheckFormBean extends FormBean {
-	private String amtWithdrawn;
-	private String amtConfirm;
-	private String requestCheck;
-	public String getAmtWithdrawn() {
-		return amtWithdrawn;
-	}
-	public void setAmtWithdrawn(String amtWithdrawn) {
-		this.amtWithdrawn = amtWithdrawn.trim();
-	}
-	public double getAmountDouble() {
-		return Double.parseDouble(amtWithdrawn);
-	}
-	public String getAmtConfirm() {
-		return amtConfirm;
-	}
-	public void setAmtConfirm(String amtConfirm) {
-		this.amtConfirm = amtConfirm.trim();
-	}
-	public String getRequestCheck() {
-		return requestCheck;
-	}
-	public void setRequestCheck(String requestCheck) {
-		this.requestCheck = requestCheck;
-	}
+	private String cashValue;
 	
+    public RequestCheckFormBean(String cashValue) {
+    	this.cashValue = cashValue;
+    }
+	
+	public String getCashValue() {
+		return cashValue;
+	}
+
+	public void setCashValue(String cashValue) {
+		this.cashValue = cashValue;
+	}
+
+	public double getCashDouble() {
+		return Double.parseDouble(cashValue);
+	}
+
 	public List<String> getValidationErrors() {
 		List<String> errors = new ArrayList<String>();
 
-		if (amtWithdrawn == null || amtWithdrawn.length() == 0) {
+		if (cashValue == null || cashValue.length() == 0) {
 			errors.add("The input you provided is not valid");
 		}
-		
-		if (amtConfirm == null || amtConfirm.length() == 0) {
-			errors.add("The input you provided is not valid");
-		}
-		if(requestCheck == null) {
-			errors.add("The input you provided is not valid");
-		}
+
 		if (errors.size() > 0) {
 			return errors;
 		}
-		
-		if (!amtWithdrawn.equals(amtConfirm)) {
-			errors.add("The input you provided is not valid");
-		}
+
 		try {
-			Double.parseDouble(amtWithdrawn);
-			if (getAmountDouble() < 1 || getAmountDouble() > 10000000) {
+			Double.parseDouble(cashValue);
+			if (getCashDouble() < 1 || getCashDouble() > 1000000000) {
 				errors.add("The input you provided is not valid");
 			}
 		}
