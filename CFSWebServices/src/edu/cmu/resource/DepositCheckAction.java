@@ -37,8 +37,6 @@ public class DepositCheckAction {
 		HttpSession session = request.getSession();
 		List<String> errors = new ArrayList<String>();
 		MessageJSON depositCheckMessage = new MessageJSON();
-		TransactionBean bean = new TransactionBean();
-		TransactionDAO transactionDAO = model.getTransactionDAO();
 		CustomerBean user = (CustomerBean) session.getAttribute("user");
 		CustomerDAO customerDAO = model.getCustomerDAO();
 		

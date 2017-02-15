@@ -23,9 +23,7 @@ public class Model {
 	private CustomerDAO customerDAO;
     private EmployeeDAO employeeDAO;
     private FundDAO fundDAO;
-    private FundPriceHistoryDAO fundPriceHistoryDAO;
     private PositionDAO positionDAO;
-    private TransactionDAO transactionDAO;
 
     public Model(ServletConfig config) throws ServletException, RollbackException {
         try {
@@ -40,9 +38,7 @@ public class Model {
             customerDAO = new CustomerDAO(pool, "customer");
             employeeDAO = new EmployeeDAO(pool, "employee");
             fundDAO = new FundDAO(pool, "fund");
-            fundPriceHistoryDAO = new FundPriceHistoryDAO(pool, "fundHistory");
             positionDAO = new PositionDAO(pool, "position");
-            transactionDAO = new TransactionDAO(pool, "transaction");
             
             //pre-populatnig with employee
             
@@ -82,15 +78,7 @@ public class Model {
     public FundDAO getFundDAO() {
         return fundDAO;
     }
-    public FundPriceHistoryDAO getFundPriceHistoryDAO() {
-        return fundPriceHistoryDAO;
-    }
     public PositionDAO getPositionDAO() {
         return positionDAO;
     }
-    public TransactionDAO getTransactionDAO() {
-        return transactionDAO;
-    }
-    
-    
 }
