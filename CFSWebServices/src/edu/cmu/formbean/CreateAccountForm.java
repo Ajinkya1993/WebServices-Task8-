@@ -35,27 +35,22 @@ public class CreateAccountForm {
 
 		if (firstNameInput != null) {
 			firstName = sanitize(firstNameInput).trim();
-			firstName = firstName.substring(0, 1).toUpperCase() + firstName.substring(1);
 		}
 
 		if (lastNameInput != null) {
 			lastName = sanitize(lastNameInput).trim();
-			lastName = lastName.substring(0, 1).toUpperCase() + lastName.substring(1);
 		}
 
 		if (addressInput != null) {
 			address = sanitize(addressInput).trim();
-			address = address.substring(0, 1).toUpperCase() + address.substring(1);
 		}
 
 		if (cityInput != null) {
 			city = sanitize(cityInput).trim();
-			city = city.substring(0, 1).toUpperCase() + city.substring(1);
 		}
 
 		if (stateInput != null) {
 			state = sanitize(stateInput).trim();
-			state = state.substring(0, 1).toUpperCase() + state.substring(1);
 		}
 
 		if (zipCodeInput != null) {

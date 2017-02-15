@@ -26,7 +26,7 @@ public class RequestCheckFormBean extends FormBean {
 
 	public List<String> getValidationErrors() {
 		List<String> errors = new ArrayList<String>();
-
+/*
 		if (cashValue == null || cashValue.length() == 0) {
 			errors.add("The input you provided is not valid");
 		}
@@ -44,7 +44,7 @@ public class RequestCheckFormBean extends FormBean {
 		catch(NumberFormatException e) {
 			errors.add("The input you provided is not valid");
 		}
-
+*/
 		return errors;
 	}
 	
