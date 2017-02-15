@@ -11,15 +11,18 @@ import org.json.JSONObject;
 
 import edu.cmu.databean.*;
 import edu.cmu.JSON.MessageJSON;
-import edu.cmu.formbean.CreateAccountForm;
+import edu.cmu.formbean.*;
 import edu.cmu.model.CustomerDAO;
+import edu.cmu.model.EmployeeDAO;
 import edu.cmu.model.Model;
 
 public class CreateCustomerAccountAction {
 	private CustomerDAO customerDAO;
+	private EmployeeDAO employeeDAO;
 
 	public CreateCustomerAccountAction(Model model) {
 		customerDAO = model.getCustomerDAO();
+		employeeDAO = model.getEmployeeDAO();
 	}
 
 	public MessageJSON createAccount(String jsonString, HttpServletRequest request)
@@ -27,20 +30,27 @@ public class CreateCustomerAccountAction {
 		JSONObject jsonObject = new JSONObject(jsonString);
 		CreateAccountForm form = new CreateAccountForm(jsonObject);
 		List<String> errors = new ArrayList<String>();
+		
 
+		String checkUser = (String) request.getSession(false).getAttribute("userType");
+		if (!checkUser.equals("employee")) {
+			return new MessageJSON("You must be an employee to perform this action");
+		}
+		
 		EmployeeBean user = (EmployeeBean) request.getSession().getAttribute("user");
 		if (user == null) {
 			return new MessageJSON("You are not currently logged in");
 		}
 		
-		String checkUser = (String) request.getSession(false).getAttribute("userType");
-		if (!checkUser.equals("Employee")) {
-			return new MessageJSON("You must be an employee to perform this action");
-		}
-		
+
 		errors.addAll(form.getValidationErrors());
 
 		if (errors.size() > 0) {
+			return new MessageJSON("The input you provided is not valid");
+		}
+		
+		EmployeeBean employee = employeeDAO.read(form.getUserName());
+		if(employee != null) {
 			return new MessageJSON("The input you provided is not valid");
 		}
 

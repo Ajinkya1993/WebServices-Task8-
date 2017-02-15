@@ -31,6 +31,7 @@ public class SellFundAction {
 		HttpSession session = request.getSession();
 		List<String> errors = new ArrayList<String>();
 		MessageJSON message = new MessageJSON();
+  	    CustomerBean user = (CustomerBean) session.getAttribute("user");
 
 		PositionDAO positionDAO = model.getPositionDAO();
 		CustomerDAO customerDAO = model.getCustomerDAO();
@@ -56,7 +57,6 @@ public class SellFundAction {
            }
          
         // update shares and cash
-     	    CustomerBean user = (CustomerBean) session.getAttribute("user");
            int fundid = fundDAO.read(sellfundFormBean.getsymbol()).getFundId();
            double shares = positionDAO.getPosition(user.getCustomerId(), fundid).getShares();
     	   double price = fundDAO.read(sellfundFormBean.getsymbol()).getPrice();
