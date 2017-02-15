@@ -56,7 +56,7 @@ public class RequestCheckAction {
         	 customerBean.setCash(cash - requestCheckFormBean.getCashDouble());
         	 customerDAO.update(customerBean);
          } else {
-        	 message = new MessageJSON("You don’t have sufficient funds in your account to cover the requested check");
+        	 message = new MessageJSON("You don't have sufficient funds in your account to cover the requested check");
      		return message;
          }
          
