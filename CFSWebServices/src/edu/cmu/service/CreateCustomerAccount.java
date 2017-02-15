@@ -17,10 +17,15 @@ import edu.cmu.resource.CreateCustomerAccountAction;
 public class CreateCustomerAccount {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
-	public MessageJSON createNewCustomerAccount(@Context HttpServletRequest request, String jsonString) throws JSONException, ServletException, RollbackException {
-		Controller controller = new Controller();
-		controller.init();
-		CreateCustomerAccountAction createAccountObject = new CreateCustomerAccountAction(controller.getModel());
-		return createAccountObject.createAccount(jsonString, request);
+	public MessageJSON createNewCustomerAccount(@Context HttpServletRequest request, String jsonString)
+			throws JSONException, ServletException, RollbackException {
+		try {
+			Controller controller = new Controller();
+			controller.init();
+			CreateCustomerAccountAction createAccountObject = new CreateCustomerAccountAction(controller.getModel());
+			return createAccountObject.createAccount(jsonString, request);
+		} catch (Exception e) {
+			return new MessageJSON("The input you provided is not valid");
+		}
 	}
 }
