@@ -17,7 +17,7 @@ import edu.cmu.model.Model;
 import edu.cmu.resource.BuyFundAction;
 import edu.cmu.resource.Controller;
 
-@Path("/createFund")
+@Path("/buyFund")
 public class BuyFund {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
