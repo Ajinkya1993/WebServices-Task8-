@@ -31,9 +31,7 @@ public class SellFundAction {
 		HttpSession session = request.getSession();
 		List<String> errors = new ArrayList<String>();
 		MessageJSON message = new MessageJSON();
-  	    CustomerBean user = (CustomerBean) session.getAttribute("user");
-
-		PositionDAO positionDAO = model.getPositionDAO();
+  	    PositionDAO positionDAO = model.getPositionDAO();
 		CustomerDAO customerDAO = model.getCustomerDAO();
 		FundDAO fundDAO = model.getFundDAO();
 		
@@ -44,7 +42,7 @@ public class SellFundAction {
         }
     	
     	// Check if the user is an customer
-        if (!(session.getAttribute("userType") != null) && session.getAttribute("userType").equals("employee")) {
+        if ((session.getAttribute("userType") != null) && session.getAttribute("userType").equals("employee")) {
         	message = new MessageJSON("You must be a customer to perform this action");
             return message;
         }
@@ -57,6 +55,7 @@ public class SellFundAction {
            }
          
         // update shares and cash
+           CustomerBean user = (CustomerBean) session.getAttribute("user");
            int fundid = fundDAO.read(sellfundFormBean.getsymbol()).getFundId();
            double shares = positionDAO.getPosition(user.getCustomerId(), fundid).getShares();
     	   double price = fundDAO.read(sellfundFormBean.getsymbol()).getPrice();
