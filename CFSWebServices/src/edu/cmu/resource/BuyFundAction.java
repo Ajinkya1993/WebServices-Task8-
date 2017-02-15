@@ -39,24 +39,20 @@ public class BuyFundAction {
 		PositionDAO positionDAO = model.getPositionDAO();
 		FundDAO fundDAO = model.getFundDAO();
 
-		// Validation errors check
-		errors = buyFundFormBean.getValidationErrors();
-		if (errors.size() > 0) {
-			buyFundMessage = new MessageJSON("The input you provided is not valid");
-			return buyFundMessage;
-		}
-
 		// Not logged in
 		if (session.getAttribute("user") == null) {
 			buyFundMessage = new MessageJSON("You are not currently logged in");
+			return buyFundMessage;
 		}
 
 		// Not customer
 		if ((session.getAttribute("userType") != null) && session.getAttribute("userType").equals("employee")) {
 			buyFundMessage = new MessageJSON("You must be a customer to perform this action");
+			return buyFundMessage;
 		}
 		try {
 			FundBean fundBean = fundDAO.read(buyFundFormBean.getSymbol());
+			//Check if the fund existed
 			if (fundBean == null) {
 				buyFundMessage = new MessageJSON("The fund is not founded");
 			} else {
@@ -80,6 +76,13 @@ public class BuyFundAction {
 					return buyFundMessage;
 
 				}
+				// Validation errors check
+				errors = buyFundFormBean.getValidationErrors();
+				if (errors.size() > 0) {
+					buyFundMessage = new MessageJSON("The input you provided is not valid");
+					return buyFundMessage;
+				}
+				
 				// updated
 				double currentShares =0.0;
 				int fundid = fundDAO.read(buyFundFormBean.getSymbol()).getFundId();
