@@ -11,6 +11,7 @@ import org.genericdao.Transaction;
 
 import edu.cmu.JSON.MessageJSON;
 import edu.cmu.databean.CustomerBean;
+import edu.cmu.databean.EmployeeBean;
 import edu.cmu.databean.FundBean;
 import edu.cmu.databean.TransactionBean;
 import edu.cmu.formbean.DepositCheckFormBean;
@@ -37,7 +38,7 @@ public class DepositCheckAction {
 		HttpSession session = request.getSession();
 		List<String> errors = new ArrayList<String>();
 		MessageJSON depositCheckMessage = new MessageJSON();
-		CustomerBean user = (CustomerBean) session.getAttribute("user");
+		EmployeeBean user = (EmployeeBean) session.getAttribute("user");
 		CustomerDAO customerDAO = model.getCustomerDAO();
 		
     	// Checking if the user has logged in.
@@ -47,7 +48,7 @@ public class DepositCheckAction {
         }
 		
 		// Check if the user is an employee
-        if (!(session.getAttribute("userType") != null) && session.getAttribute("userType").equals("employee")) {
+        if (!session.getAttribute("userType").equals("employee")) {
         	depositCheckMessage = new MessageJSON("You must be an employee to perform this action");
             return depositCheckMessage;
         }
@@ -60,16 +61,18 @@ public class DepositCheckAction {
       	}
       	
       	//starting from here is the set new cash value into the user's account.
-      	//No transition day call is necessary?
-      	double cash = customerDAO.getCustomerByUserName(user.getUsername()).getCash();
+      	double cash = customerDAO.getCustomerByUserName(depositCheckFormBean.getUsername()).getCash();
       	
-      	//check for the cash if is overflow
-      	if(cash + depositCheckFormBean.getCashDouble() > 1000000000) {
+//      	//check for the cash if is overflow
+//      	if(cash + depositCheckFormBean.getCashDouble() > 1000000000) {
+//      		depositCheckMessage = new MessageJSON("The input you provided is not valid");
+//      		return depositCheckMessage;
+//      	}
+      	if(customerDAO.getCustomerByUserName(depositCheckFormBean.getUsername()) == null) {
       		depositCheckMessage = new MessageJSON("The input you provided is not valid");
       		return depositCheckMessage;
       	}
-      	
-      	CustomerBean customerBean = customerDAO.getCustomerByUserName(user.getUsername());
+      	CustomerBean customerBean = customerDAO.getCustomerByUserName(depositCheckFormBean.getUsername());
       	customerBean.setCash(cash + depositCheckFormBean.getCashDouble());
       	customerDAO.update(customerBean);
       	

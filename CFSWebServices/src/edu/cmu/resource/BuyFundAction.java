@@ -35,7 +35,6 @@ public class BuyFundAction {
 		HttpSession session = request.getSession();
 		List<String> errors = new ArrayList<String>();
 		MessageJSON buyFundMessage = new MessageJSON();
-		CustomerBean user = (CustomerBean) session.getAttribute("user");
 		CustomerDAO customerDAO = model.getCustomerDAO();
 		PositionDAO positionDAO = model.getPositionDAO();
 		FundDAO fundDAO = model.getFundDAO();
@@ -53,7 +52,7 @@ public class BuyFundAction {
 		}
 
 		// Not customer
-		if (!(session.getAttribute("userType") != null) && session.getAttribute("userType").equals("employee")) {
+		if ((session.getAttribute("userType") != null) && session.getAttribute("userType").equals("employee")) {
 			buyFundMessage = new MessageJSON("You must be a customer to perform this action");
 		}
 		try {
@@ -62,49 +61,57 @@ public class BuyFundAction {
 				buyFundMessage = new MessageJSON("The fund is not founded");
 			} else {
 
+				CustomerBean user = (CustomerBean) session.getAttribute("user");
+
 				double price = fundBean.getPrice();
-				double currentBalance = user.getCash();
+				double currentBalance = customerDAO.getCustomerByUserName(user.getUsername()).getCash();
+
 				double buyAmount = buyFundFormBean.getCashDouble();
 				int shares = (int) (Math.min(currentBalance, buyAmount) / price);
 
 				if (shares < 1) {
-					buyFundMessage = new MessageJSON("You didn’t provide enough cash to make this purchase");
+					buyFundMessage = new MessageJSON("You didn't provide enough cash to make this purchase");
+					return buyFundMessage;
 				}
 
-				if (currentBalance - buyAmount < 0.01) {
+				if (currentBalance - buyAmount <= 0) {
 					buyFundMessage = new MessageJSON(
-							"You don’t have enough cash in your account to make this purchase");
+							"You don't have enough cash in your account to make this purchase");
+					return buyFundMessage;
 
 				}
 				// updated
+				double currentShares =0.0;
 				int fundid = fundDAO.read(buyFundFormBean.getSymbol()).getFundId();
 				double priceAmount = fundDAO.read(buyFundFormBean.getSymbol()).getPrice();
-				double currentShares = positionDAO.getPosition(user.getCustomerId(), fundid).getShares();
+				if (positionDAO.getPosition(user.getCustomerId(), fundid) != null) {
+				currentShares = positionDAO.getPosition(user.getCustomerId(), fundid).getShares();
+				}
+
 				double cashBalance = customerDAO.getCustomerByUserName(user.getUsername()).getCash();
-				double newBalance = cashBalance - priceAmount * currentShares;
+				double newBalance = cashBalance - priceAmount * shares;
 				user.setCash(newBalance);
 				customerDAO.update(user);
 				PositionBean positionBean = positionDAO.getPosition(user.getCustomerId(), fundid);
 				if (positionBean != null) {
 					positionBean.setShares(positionBean.getShares() + shares);
+					positionBean.setTotalValue(positionBean.getTotalValue() + shares * priceAmount);
 					positionDAO.update(positionBean);
-				}
+				} else {
+				
 				PositionBean newPositBean = new PositionBean();
 				newPositBean.setCustomerId(user.getCustomerId());
-				newPositBean.setShares(currentShares);
-				newPositBean.setFundId(positionBean.getFundId());
-				positionDAO.update(newPositBean);
-				customerDAO.update(user);
+				newPositBean.setShares(shares);
+				newPositBean.setFundId(fundid);
+				newPositBean.setTotalValue(shares * priceAmount);
+				positionDAO.create(newPositBean);
+				}
+
 			}
 
 		} catch (Exception e) {
 			buyFundMessage = new MessageJSON("The input you provided is not valid");
 			return buyFundMessage;
-		}
-		finally {
-        	if (Transaction.isActive()) {
-        		Transaction.rollback();
-        	}
 		}
 		buyFundMessage = new MessageJSON("The fund has been successfully purchased");
 		return buyFundMessage;
