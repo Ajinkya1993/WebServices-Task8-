@@ -1,6 +1,8 @@
 
 package edu.cmu.databean;
 
+import java.util.Date;
+
 import org.genericdao.MaxSize;
 import org.genericdao.PrimaryKey;
 
@@ -10,7 +12,8 @@ public class FundBean {
 	private String name;
 	private String symbol;
 	private double price;
-
+	private String date;
+	
 	public double getPrice() {
 		return price;
 	}
@@ -33,6 +36,14 @@ public class FundBean {
 
 	public void setFundId(int i) {
 		fundId = i;
+	}
+	
+	public String getDate() {
+		return date;
+	}
+	
+	public void setDate(String date) {
+		this.date = date;
 	}
 	
 	@MaxSize(50)
