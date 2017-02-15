@@ -39,7 +39,6 @@ public class BuyFundAction {
 		CustomerDAO customerDAO = model.getCustomerDAO();
 		PositionDAO positionDAO = model.getPositionDAO();
 		FundDAO fundDAO = model.getFundDAO();
-		TransactionDAO transactionDAO = model.getTransactionDAO();
 
 		// Validation errors check
 		errors = buyFundFormBean.getValidationErrors();
