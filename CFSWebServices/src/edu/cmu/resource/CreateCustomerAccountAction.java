@@ -42,6 +42,7 @@ public class CreateCustomerAccountAction {
 			return new MessageJSON("You are not currently logged in");
 		}
 		
+
 		errors.addAll(form.getValidationErrors());
 
 		if (errors.size() > 0) {
