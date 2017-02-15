@@ -34,7 +34,7 @@ public class CreateCustomerAccountAction {
 		}
 		
 		String checkUser = (String) request.getSession(false).getAttribute("userType");
-		if (!checkUser.equals("Employee")) {
+		if (!checkUser.equals("employee")) {
 			return new MessageJSON("You must be an employee to perform this action");
 		}
 		
