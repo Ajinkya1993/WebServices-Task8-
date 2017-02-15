@@ -12,7 +12,7 @@ public class Portfolio {
 
 	private String message;
 	private String cash;
-	private String funds;
+	private JSONArray funds;
 
 	public String getMessage() {
 		return message;
@@ -30,15 +30,15 @@ public class Portfolio {
 		this.cash = cash;
 	}
 
-	public String getFunds() {
+	public JSONArray getFunds() {
 		return funds;
 	}
 
-	public void setFunds(String funds) {
+	public void setFunds(JSONArray funds) {
 		this.funds = funds;
 	}
 
-	public String getCustomerDetails(PositionBean[] positions, FundDAO fundDAO)
+	public JSONArray getCustomerDetails(PositionBean[] positions, FundDAO fundDAO)
 			throws RollbackException, JSONException {
 
 		JSONArray fundsArray = new JSONArray();
@@ -52,7 +52,7 @@ public class Portfolio {
 			fundsArray.put(jsonObject);
 		}
 
-		return fundsArray.toString();
+		return fundsArray;
 
 	}
 }
