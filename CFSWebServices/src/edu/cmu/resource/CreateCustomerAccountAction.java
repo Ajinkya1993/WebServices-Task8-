@@ -11,7 +11,7 @@ import org.json.JSONObject;
 
 import edu.cmu.databean.*;
 import edu.cmu.JSON.MessageJSON;
-import edu.cmu.formbean.CreateAccountForm;
+import edu.cmu.formbean.*;
 import edu.cmu.model.CustomerDAO;
 import edu.cmu.model.EmployeeDAO;
 import edu.cmu.model.Model;
@@ -30,6 +30,7 @@ public class CreateCustomerAccountAction {
 		JSONObject jsonObject = new JSONObject(jsonString);
 		CreateAccountForm form = new CreateAccountForm(jsonObject);
 		List<String> errors = new ArrayList<String>();
+		
 
 		String checkUser = (String) request.getSession(false).getAttribute("userType");
 		if (!checkUser.equals("employee")) {

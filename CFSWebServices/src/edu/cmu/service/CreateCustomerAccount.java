@@ -25,7 +25,7 @@ public class CreateCustomerAccount {
 			CreateCustomerAccountAction createAccountObject = new CreateCustomerAccountAction(controller.getModel());
 			return createAccountObject.createAccount(jsonString, request);
 		} catch (Exception e) {
-			return new MessageJSON("The input you provided is not valid");
+			return new MessageJSON("The input you provided is not valid"); 
 		}
 	}
 }
