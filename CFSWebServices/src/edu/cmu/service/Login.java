@@ -23,7 +23,7 @@ import edu.cmu.resource.LoginAction;
 public class Login {	
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
-	public MessageJSON login(@Context HttpServletRequest request, String jsonString) throws ServletException, JSONException {
+	public MessageJSON login(@Context HttpServletRequest request, String jsonString) throws ServletException, JSONException, RollbackException {
 		try {
 			
 			JSONObject obj = new JSONObject (jsonString);
@@ -33,9 +33,12 @@ public class Login {
 			Model model = controller.getModel();
 			return new LoginAction(loginFormBean, model).perform(request);
 			
-		} catch (Exception e){
+		} /*catch (Exception e){
 			MessageJSON loginJSON = new MessageJSON("There seems to be an issue with the username/password combination that you entered");
 			return loginJSON;
-		} 
+		} */
+			finally {
+				//do  nothing
+			}
 	} 
 }

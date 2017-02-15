@@ -12,32 +12,30 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import edu.cmu.JSON.MessageJSON;
-import edu.cmu.formbean.BuyFundFormBean;
+import edu.cmu.formbean.LoginFormBean;
+import edu.cmu.formbean.SellFundFormBean;
 import edu.cmu.model.Model;
-import edu.cmu.resource.BuyFundAction;
 import edu.cmu.resource.Controller;
+import edu.cmu.resource.LoginAction;
+import edu.cmu.resource.SellFundAction;
 
-@Path("/buyFund")
-public class BuyFund {
+@Path("/sellFund")
+public class SellFund {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
-	public MessageJSON login(@Context HttpServletRequest request, String jsonString)
-			throws ServletException, JSONException {
-
+	public MessageJSON login(@Context HttpServletRequest request, String jsonString) throws ServletException, JSONException {
 		try {
-			JSONObject object = new JSONObject(jsonString);
-			BuyFundFormBean buyFundFormBean = new BuyFundFormBean(object.getString("symbol"),
-					object.getString("cashValue"));
+			
+			JSONObject obj = new JSONObject (jsonString);
+			SellFundFormBean sellFundFormBean = new SellFundFormBean(obj.getString("symbol"), obj.getString("numShares"));
 			Controller controller = new Controller();
 			controller.init();
 			Model model = controller.getModel();
-			return new BuyFundAction(buyFundFormBean, model).perform(request);
-		} catch (Exception e) {
+			return new SellFundAction(sellFundFormBean, model).perform(request);
+			
+		} catch (Exception e){
 			MessageJSON message = new MessageJSON("The input you provided is not valid");
 			return message;
-
-		}
-
-	}
-
+		} 
+	} 
 }

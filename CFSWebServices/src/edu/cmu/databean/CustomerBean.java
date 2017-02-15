@@ -1,118 +1,109 @@
 
 package edu.cmu.databean;
 
-import org.genericdao.MaxSize;
+import org.genericdao.MaxSize; // Need to check if we have to limit the size of fields.
 import org.genericdao.PrimaryKey;
 
 @PrimaryKey("customerId")
 public class CustomerBean {
 	private int customerId;
-	private String username;
-	private String password;
 	private String firstName;
 	private String lastName;
-	private String addrLine1;
-	private String addrLine2;
+	private String address;
 	private String city;
 	private String state;
 	private String zip;
+	private String email;
 	private double cash;
+	private String username;
+	private String password;
 
 	public int getCustomerId() {
 		return customerId;
 	}
-	
-	public String getUsername() {
-		return username;
-	}
 
-	public String getPassword() {
-		return password;
+	public void setCustomerId(int customerId) {
+		this.customerId = customerId;
 	}
 
 	public String getFirstName() {
 		return firstName;
 	}
 
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
 	public String getLastName() {
 		return lastName;
 	}
 
-	public String getAddrLine1() {
-		return addrLine1;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
-	public String getAddrLine2() {
-		return addrLine2;
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	public String getCity() {
 		return city;
 	}
 
+	public void setCity(String city) {
+		this.city = city;
+	}
+
 	public String getState() {
 		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
 	}
 
 	public String getZip() {
 		return zip;
 	}
 
+	public void setZip(String zip) {
+		this.zip = zip;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public double getCash() {
 		return cash;
 	}
 
-	public void setCustomerId(int i) {
-		customerId = i;
+	public void setCash(double cash) {
+		this.cash = cash;
 	}
 
-	@MaxSize(50)
-	public void setUsername(String s) {
-		username = s;
+	public String getUsername() {
+		return username;
 	}
 
-	@MaxSize(50)
-	public void setPassword(String s) {
-		password = s;
+	public void setUsername(String userName) {
+		this.username = userName;
 	}
 
-	@MaxSize(50)
-	public void setFirstName(String s) {
-		firstName = s;
+	public String getPassword() {
+		return password;
 	}
 
-	@MaxSize(50)
-	public void setLastName(String s) {
-		lastName = s;
-	}
-
-	@MaxSize(50)
-	public void setAddrLine1(String s) {
-		addrLine1 = s;
-	}
-
-	@MaxSize(50)
-	public void setAddrLine2(String s) {
-		addrLine2 = s;
-	}
-
-	@MaxSize(50)
-	public void setCity(String s) {
-		city = s;
-	}
-
-	@MaxSize(50)
-	public void setState(String s) {
-		state = s;
-	}
-
-	@MaxSize(50)
-	public void setZip(String s) {
-		zip = s;
-	}
-
-	public void setCash(double d) {
-		cash = d;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 }
