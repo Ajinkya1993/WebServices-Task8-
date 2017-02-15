@@ -27,7 +27,6 @@ public class RequestCheckAction {
 		HttpSession session = request.getSession();
 		List<String> errors = new ArrayList<String>();
 		MessageJSON message = new MessageJSON();
-  	    CustomerBean user = (CustomerBean) session.getAttribute("user");
 		CustomerDAO customerDAO = model.getCustomerDAO();
 
 		// Checking if the user has logged in.
@@ -35,21 +34,22 @@ public class RequestCheckAction {
     		message = new MessageJSON("You are not currently logged in");
             return message;
         }
-    	
+    	  System.out.println("YYYYYYYY");
     	// Check if the user is an customer
-        if (!(session.getAttribute("userType") != null) && session.getAttribute("userType").equals("employee")) {
+        if ((session.getAttribute("userType") != null) && session.getAttribute("userType").equals("employee")) {
         	message = new MessageJSON("You must be a customer to perform this action");
             return message;
         }
-		
+
         // check if there is invalid input
 		   errors = requestCheckFormBean.getValidationErrors();
            if (errors.size() > 0) {
         	   message = new MessageJSON("The input you provided is not valid");
                return message;
            }
-        
+      
         // update cash
+     	 CustomerBean user = (CustomerBean) request.getSession(false).getAttribute("user");
          double cash = customerDAO.getCustomerByUserName(user.getUsername()).getCash();
          if (requestCheckFormBean.getCashDouble() <= cash) {
         	 CustomerBean customerBean = customerDAO.getCustomerByUserName(user.getUsername());
@@ -59,6 +59,7 @@ public class RequestCheckAction {
         	 message = new MessageJSON("You don't have sufficient funds in your account to cover the requested check");
      		return message;
          }
+         
          
 		message = new MessageJSON("The check has been successfully requested");
 		return message;

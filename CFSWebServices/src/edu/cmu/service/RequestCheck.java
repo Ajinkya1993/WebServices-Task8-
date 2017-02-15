@@ -30,9 +30,11 @@ public class RequestCheck {
 			Controller controller = new Controller();
 			controller.init();
 			Model model = controller.getModel();
+			System.out.println("!!!!!!!!!!!!!!");
 			return new RequestCheckAction(requestCheckFormBean, model).perform(request);
 			
 		} catch (Exception e){
+			System.out.println("XXXXXXXXXXX");
 			MessageJSON message = new MessageJSON("The input you provided is not valid");
 			return message;
 		} 
