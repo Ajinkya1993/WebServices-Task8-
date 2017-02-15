@@ -110,10 +110,7 @@ public class BuyFundAction {
 		buyFundMessage = new MessageJSON("The fund has been successfully purchased");
 		return buyFundMessage;
 
-		// possible share the customer can buy
-		// currentCash - buyAmount < 0.01 “You don’t have enough cash in your
-		// account to make this
-
-		// int sharestoBuy = (int) (Math.min(current, required) / fundPrice)
+		
+		
 	}
 }
