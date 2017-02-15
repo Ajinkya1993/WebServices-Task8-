@@ -32,7 +32,7 @@ public class DepositCheck {
 			return new DepositCheckAction(depositCheckFormBean, model).perform(request);
 			
 		} catch (Exception e){
-			MessageJSON loginJSON = new MessageJSON("The input you provided is not valid");
+			MessageJSON loginJSON = new MessageJSON("The input you provided is not valid"+e.toString());
 			return loginJSON;
 		} 
 	}
