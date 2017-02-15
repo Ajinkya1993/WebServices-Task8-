@@ -35,10 +35,7 @@ public class RequestCheckAction {
     		message = new MessageJSON("You are not currently logged in");
             return message;
         }
-<<<<<<< HEAD
-=======
-    	
->>>>>>> 47929695857543540070d862411bdc977920d77b
+
     	// Check if the user is an customer
         if (!(session.getAttribute("userType") != null) && session.getAttribute("userType").equals("employee")) {
         	message = new MessageJSON("You must be a customer to perform this action");
