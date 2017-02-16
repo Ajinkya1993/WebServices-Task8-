@@ -7,6 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import edu.cmu.databean.CustomerBean;
+import edu.cmu.databean.FundObject;
 import edu.cmu.databean.Portfolio;
 import edu.cmu.databean.PositionBean;
 import edu.cmu.model.CustomerDAO;
@@ -26,27 +27,32 @@ public class PortfolioAction {
 	}
 	
 	public Portfolio getPortfolio(HttpServletRequest request) throws RollbackException, JSONException {
-//		CustomerBean customer = (CustomerBean) request.getSession().getAttribute("user");
-//		if(customer == null) {
-//			Portfolio portfolio = new Portfolio();
-//			portfolio.setMessage("You are not currently logged in");
-//			return portfolio;
-//		}
+		CustomerBean customer = (CustomerBean) request.getSession().getAttribute("user");
+		if(customer == null) {
+			Portfolio portfolio = new Portfolio();
+			portfolio.setMessage("You are not currently logged in");
+			return portfolio;
+		}
 		
-//		String checkUser = (String) request.getSession(false).getAttribute("userType");
-//		if (!checkUser.equals("Customer")) {
-//			Portfolio portfolio = new Portfolio();
-//			portfolio.setMessage("You must be a customer to perform this action”");
-//			return portfolio;
-//		}
+		String checkUser = (String) request.getSession(false).getAttribute("userType");
+		if (!checkUser.equals("customer")) {
+			Portfolio portfolio = new Portfolio();
+			portfolio.setMessage("You must be a customer to perform this action”");
+			return portfolio;
+		}
 		
-		CustomerBean customer = customerDAO.getCustomerByUserName("gg"); // for testing
 		PositionBean[] positions = positionDAO.getPositionsByCustomerId(customer.getCustomerId());
+		if(positions.length == 0) {
+			Portfolio portfolio = new Portfolio();
+			portfolio.setMessage("You don’t have any funds in your Portfolio");
+			return portfolio;
+		}
 		Portfolio portfolio = new Portfolio();
 		portfolio.setCash(String.valueOf(customer.getCash()));
 		portfolio.setMessage("The action was successful");
-		JSONArray jsonArray = portfolio.getCustomerDetails(positions, fundDAO);
-		portfolio.setFunds(jsonArray);
+		FundObject[] funds = portfolio.getCustomerDetails(positions, fundDAO);
+//		System.out.println(jsonArray.toString());
+		portfolio.setFunds(funds);
 		return portfolio;
 	}
 }
