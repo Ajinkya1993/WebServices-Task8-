@@ -55,7 +55,7 @@ public class CreateFundFormBean {
 
 		try {
 			Double.parseDouble(initial_value);
-			if (getInitial_valueDouble() < 1 || getInitial_valueDouble() > 1000000000) {
+			if (getInitial_valueDouble() <= 0 || getInitial_valueDouble() > 1000000000) {
 				errors.add("The input you provided is not valid");
 			}
 		}
