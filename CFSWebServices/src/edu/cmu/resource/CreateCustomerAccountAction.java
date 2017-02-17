@@ -31,16 +31,17 @@ public class CreateCustomerAccountAction {
 		CreateAccountForm form = new CreateAccountForm(jsonObject);
 		List<String> errors = new ArrayList<String>();
 		
-
+		EmployeeBean user = (EmployeeBean) request.getSession().getAttribute("user");
+		if (user == null) {
+			return new MessageJSON("You are not currently logged in");
+		}
+		
 		String checkUser = (String) request.getSession(false).getAttribute("userType");
 		if (!checkUser.equals("employee")) {
 			return new MessageJSON("You must be an employee to perform this action");
 		}
 		
-		EmployeeBean user = (EmployeeBean) request.getSession().getAttribute("user");
-		if (user == null) {
-			return new MessageJSON("You are not currently logged in");
-		}
+	
 		
 
 		errors.addAll(form.getValidationErrors());
