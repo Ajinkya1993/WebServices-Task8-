@@ -66,6 +66,9 @@ public class CreateAccountForm {
 			if (checkCashValue(checkCash)) {
 				cash = getCashAsDouble(cashInput);
 			}
+			else {
+				cash = 0d;
+			}
 		} else {
 			cash = 0d;
 		}
@@ -82,7 +85,11 @@ public class CreateAccountForm {
 	private boolean checkCashValue(String cashInput) {
 		try {
 			Double.parseDouble(cashInput);
+			if(cashInput.equals("0")) {
+				return true;
+			}
 			if (getCashAsDouble(cashInput) < 1 || getCashAsDouble(cashInput) > 10000000) {
+				System.out.println("Inside here");
 				return false;
 			}
 		} catch (NumberFormatException e) {
@@ -179,74 +186,74 @@ public class CreateAccountForm {
 		List<String> errors = new ArrayList<String>();
 
 		if (firstName == null || firstName.length() == 0)
-			errors.add("First name is required.");
+			errors.add("The input you provided is not valid");
 
 		if (firstName != null && firstName.length() > 50) {
-			errors.add("First name must be within 50 characters.");
+			errors.add("The input you provided is not valid");
 		}
 
 		if (lastName == null || lastName.length() == 0)
-			errors.add("Last name is required.");
+			errors.add("The input you provided is not valid");
 
 		if (lastName != null && lastName.length() > 50) {
-			errors.add("Last name must be within 50 characters.");
+			errors.add("The input you provided is not valid");
 		}
 
 		if (address == null || address.length() == 0)
-			errors.add("Address is required.");
+			errors.add("The input you provided is not valid");
 
 		if (address != null && address.length() > 50) {
-			errors.add("Address must be within 50 characters.");
+			errors.add("The input you provided is not valid");
 		}
 
 		if (city == null || city.length() == 0)
-			errors.add("City is required.");
+			errors.add("The input you provided is not valid");
 
 		if (city != null && city.length() > 50) {
-			errors.add("City must be within 50 characters.");
+			errors.add("The input you provided is not valid");
 		}
 
 		if (state == null || state.length() == 0)
-			errors.add("State is required.");
+			errors.add("The input you provided is not valid");
 
 		if (state != null && state.length() > 50) {
 			errors.add("State must be within 50 characters.");
 		}
 
 		if (zip == null || zip.length() == 0)
-			errors.add("ZIP code is required.");
+			errors.add("The input you provided is not valid");
 
 		if (zip != null && zip.length() > 50) {
-			errors.add("Zip code must be within 50 characters.");
+			errors.add("The input you provided is not valid");
 		}
 
 		if (email == null || email.length() == 0)
-			errors.add("E-mail ID is required.");
+			errors.add("The input you provided is not valid");
 
 		if (email != null && email.length() > 50) {
-			errors.add("E-mail ID must be within 50 characters.");
+			errors.add("The input you provided is not valid");
 		}
 
 		if (checkCash != null && !checkCashValue(checkCash)) {
-			errors.add("Cash value is not in the right format.");
+			errors.add("The input you provided is not valid");
 		}
 
 		if (checkCash != null && checkCash.length() > 50) {
-			errors.add("Cash must be within 50 characters.");
+			errors.add("The input you provided is not valid");
 		}
 
 		if (userName == null || userName.length() == 0)
-			errors.add("User name is required.");
+			errors.add("The input you provided is not valid");
 
 		if (userName != null && userName.length() > 50) {
-			errors.add("User name must be within 50 characters.");
+			errors.add("The input you provided is not valid");
 		}
 
 		if (password == null || password.length() == 0)
-			errors.add("Password is required.");
+			errors.add("The input you provided is not valid");
 
 		if (password != null && password.length() > 50) {
-			errors.add("Password must be within 50 characters.");
+			errors.add("The input you provided is not valid");
 		}
 
 		return errors;
