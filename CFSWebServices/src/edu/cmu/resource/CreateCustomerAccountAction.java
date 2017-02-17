@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.genericdao.RollbackException;
 import org.json.JSONException;
@@ -30,9 +31,10 @@ public class CreateCustomerAccountAction {
 		JSONObject jsonObject = new JSONObject(jsonString);
 		CreateAccountForm form = new CreateAccountForm(jsonObject);
 		List<String> errors = new ArrayList<String>();
+		HttpSession session = request.getSession();
 		
-		EmployeeBean user = (EmployeeBean) request.getSession().getAttribute("user");
-		if (user == null) {
+
+		if (session.getAttribute("user") == null) {
 			return new MessageJSON("You are not currently logged in");
 		}
 		
@@ -41,9 +43,6 @@ public class CreateCustomerAccountAction {
 			return new MessageJSON("You must be an employee to perform this action");
 		}
 		
-	
-		
-
 		errors.addAll(form.getValidationErrors());
 
 		if (errors.size() > 0) {
