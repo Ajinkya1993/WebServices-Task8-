@@ -10,19 +10,17 @@ import javax.ws.rs.core.MediaType;
 import org.genericdao.RollbackException;
 import org.json.JSONException;
 import edu.cmu.JSON.MessageJSON;
-import edu.cmu.resource.Controller;
+import edu.cmu.model.Model;
 import edu.cmu.resource.CreateCustomerAccountAction;
 
 @Path("/createCustomerAccount")
 public class CreateCustomerAccount {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
-	public MessageJSON createNewCustomerAccount(@Context HttpServletRequest request, String jsonString)
+	public MessageJSON createNewCustomerAccount(@Context HttpServletRequest request, String jsonString, @Context Model model)
 			throws JSONException, ServletException, RollbackException {
 		try {
-			Controller controller = new Controller();
-			controller.init();
-			CreateCustomerAccountAction createAccountObject = new CreateCustomerAccountAction(controller.getModel());
+			CreateCustomerAccountAction createAccountObject = new CreateCustomerAccountAction();
 			return createAccountObject.createAccount(jsonString, request);
 		} catch (Exception e) {
 			return new MessageJSON("The input you provided is not valid"); 

@@ -16,8 +16,7 @@ import edu.cmu.model.Model;
 public class TransitionDayAction {
 	
 	private Model model;
-	public TransitionDayAction(Model model) {
-		this.model = model;
+	public TransitionDayAction() {
 	}
 
 	public String getName() {
@@ -28,7 +27,7 @@ public class TransitionDayAction {
         HttpSession session = request.getSession();
         MessageJSON transitionDayMessage = new MessageJSON();
 
-        FundDAO fundDAO = model.getFundDAO();
+        FundDAO fundDAO = Model.getFundDAO();
         
     	// Checking if the user has logged in.
     	if (session.getAttribute("user") == null) {
@@ -56,7 +55,7 @@ public class TransitionDayAction {
 	        }
 		    Transaction.commit();
         } catch (Exception e) {
-        	transitionDayMessage = new MessageJSON("“The input you provided is not valid");
+        	transitionDayMessage = new MessageJSON("ï¿½The input you provided is not valid");
         	return transitionDayMessage;
         } finally {
         	if (Transaction.isActive()) {

@@ -16,19 +16,16 @@ import edu.cmu.model.Model;
 
 public class RequestCheckAction {
 	private RequestCheckFormBean requestCheckFormBean;
-	private Model model;
 	
-	public RequestCheckAction(RequestCheckFormBean bean, Model model) {
+	public RequestCheckAction(RequestCheckFormBean bean) {
 		this.requestCheckFormBean = bean;
-		this.model = model;
-		}
+	}
 	
 	public MessageJSON perform (HttpServletRequest request) throws RollbackException {
 		HttpSession session = request.getSession();
 		List<String> errors = new ArrayList<String>();
 		MessageJSON message = new MessageJSON();
-  	    CustomerBean user = (CustomerBean) session.getAttribute("user");
-		CustomerDAO customerDAO = model.getCustomerDAO();
+		CustomerDAO customerDAO = Model.getCustomerDAO();
 
 		// Checking if the user has logged in.
     	if (session.getAttribute("user") == null) {
@@ -37,7 +34,7 @@ public class RequestCheckAction {
         }
 
     	// Check if the user is an customer
-        if (!(session.getAttribute("userType") != null) && session.getAttribute("userType").equals("employee")) {
+        if ((session.getAttribute("userType") != null) && session.getAttribute("userType").equals("employee")) {
         	message = new MessageJSON("You must be a customer to perform this action");
             return message;
         }
@@ -50,6 +47,7 @@ public class RequestCheckAction {
            }
         
         // update cash
+     	 CustomerBean user = (CustomerBean) session.getAttribute("user");
          double cash = customerDAO.getCustomerByUserName(user.getUsername()).getCash();
          if (requestCheckFormBean.getCashDouble() <= cash) {
         	 CustomerBean customerBean = customerDAO.getCustomerByUserName(user.getUsername());

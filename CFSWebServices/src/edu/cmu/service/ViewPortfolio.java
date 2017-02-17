@@ -11,17 +11,15 @@ import javax.ws.rs.core.MediaType;
 import org.genericdao.RollbackException;
 import org.json.JSONException;
 import edu.cmu.databean.Portfolio;
-import edu.cmu.resource.Controller;
+import edu.cmu.model.Model;
 import edu.cmu.resource.PortfolioAction;
 
 @Path("/viewPortfolio")
 public class ViewPortfolio {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Portfolio getPortfolioDetails(@Context HttpServletRequest request) throws ServletException, RollbackException, JSONException {
-		Controller controller = new Controller();
-		controller.init();
-		PortfolioAction portfolio = new PortfolioAction(controller.getModel());
+	public Portfolio getPortfolioDetails(@Context HttpServletRequest request, @Context Model model) throws ServletException, RollbackException, JSONException {
+		PortfolioAction portfolio = new PortfolioAction();
 		return portfolio.getPortfolio(request);
 	}
 }

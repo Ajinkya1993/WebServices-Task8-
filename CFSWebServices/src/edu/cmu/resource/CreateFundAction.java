@@ -19,11 +19,9 @@ import edu.cmu.model.Model;
 public class CreateFundAction {
 
 	private CreateFundFormBean createFundFormBean;
-	private Model model;
 	
-	public CreateFundAction(CreateFundFormBean bean, Model model) {
+	public CreateFundAction(CreateFundFormBean bean) {
 		this.createFundFormBean = bean;
-		this.model = model;
 		
 	}
 
@@ -36,7 +34,7 @@ public class CreateFundAction {
 		List<String> errors = new ArrayList<String>();
 		MessageJSON createFundMessage = new MessageJSON();
 		FundBean fundBean = new FundBean();
-		FundDAO fundDAO = model.getFundDAO();
+		FundDAO fundDAO = Model.getFundDAO();
 		
 		// Checking if the user has logged in.
     	if (session.getAttribute("user") == null) {

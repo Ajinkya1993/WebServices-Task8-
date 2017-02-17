@@ -15,23 +15,19 @@ import edu.cmu.JSON.MessageJSON;
 import edu.cmu.formbean.BuyFundFormBean;
 import edu.cmu.model.Model;
 import edu.cmu.resource.BuyFundAction;
-import edu.cmu.resource.Controller;
 
 @Path("/buyFund")
 public class BuyFund {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
-	public MessageJSON login(@Context HttpServletRequest request, String jsonString)
+	public MessageJSON login(@Context HttpServletRequest request, String jsonString, @Context Model model)
 			throws ServletException, JSONException {
 
 		try {
 			JSONObject object = new JSONObject(jsonString);
 			BuyFundFormBean buyFundFormBean = new BuyFundFormBean(object.getString("symbol"),
 					object.getString("cashValue"));
-			Controller controller = new Controller();
-			controller.init();
-			Model model = controller.getModel();
-			return new BuyFundAction(buyFundFormBean, model).perform(request);
+			return new BuyFundAction(buyFundFormBean).perform(request);
 		} catch (Exception e) {
 			MessageJSON message = new MessageJSON("The input you provided is not valid");
 			return message;

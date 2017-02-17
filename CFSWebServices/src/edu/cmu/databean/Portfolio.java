@@ -1,5 +1,8 @@
 package edu.cmu.databean;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlRootElement;
 import org.genericdao.RollbackException;
 import org.json.JSONArray;
@@ -12,7 +15,7 @@ public class Portfolio {
 
 	private String message;
 	private String cash;
-	private JSONArray funds;
+	private FundObject[] funds;
 
 	public String getMessage() {
 		return message;
@@ -30,29 +33,33 @@ public class Portfolio {
 		this.cash = cash;
 	}
 
-	public JSONArray getFunds() {
+	public FundObject[] getFunds() {
 		return funds;
 	}
 
-	public void setFunds(JSONArray funds) {
+	public void setFunds(FundObject[] funds) {
 		this.funds = funds;
 	}
 
-	public JSONArray getCustomerDetails(PositionBean[] positions, FundDAO fundDAO)
-			throws RollbackException, JSONException {
+	public FundObject[] getCustomerDetails(PositionBean[] positions, FundDAO fundDAO)
+			throws RollbackException {
 
-		JSONArray fundsArray = new JSONArray();
+		List<FundObject> fundsArray = new ArrayList<>();;
 
 		for (PositionBean positionBean : positions) {
-			JSONObject jsonObject = new JSONObject();
-			FundBean fund = fundDAO.read(positionBean.getFundId());
-			jsonObject.put("name", fund.getName());
-			jsonObject.put("shares", positionBean.getShares());
-			jsonObject.put("price", fund.getPrice());
-			fundsArray.put(jsonObject);
+			FundObject fund = new FundObject();
+			FundBean fundBean = fundDAO.read(positionBean.getFundId());
+			fund.setName(fundBean.getName());
+			fund.setShares(String.valueOf(positionBean.getShares()));
+			fund.setPrice(String.valueOf(fundBean.getPrice()));
+			fundsArray.add(fund);
 		}
-
-		return fundsArray;
+		
+		FundObject[] funds = new FundObject[fundsArray.size()];
+		for (int i = 0; i < funds.length; i++) {
+			funds[i] = fundsArray.get(i);
+		}
+		return funds;
 
 	}
 }

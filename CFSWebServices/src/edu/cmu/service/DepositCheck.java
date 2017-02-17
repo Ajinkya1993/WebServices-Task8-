@@ -13,8 +13,6 @@ import org.json.JSONObject;
 
 import edu.cmu.JSON.MessageJSON;
 import edu.cmu.formbean.DepositCheckFormBean;
-import edu.cmu.model.Model;
-import edu.cmu.resource.Controller;
 import edu.cmu.resource.DepositCheckAction;
 
 @Path("/depositCheck")
@@ -26,10 +24,7 @@ public class DepositCheck {
 			
 			JSONObject obj = new JSONObject (jsonString);
 			DepositCheckFormBean depositCheckFormBean = new DepositCheckFormBean(obj.getString("username"), obj.getString("cash"));
-			Controller controller = new Controller();
-			controller.init();
-			Model model = controller.getModel();
-			return new DepositCheckAction(depositCheckFormBean, model).perform(request);
+			return new DepositCheckAction(depositCheckFormBean).perform(request);
 			
 		} catch (Exception e){
 			MessageJSON loginJSON = new MessageJSON("The input you provided is not valid"+e.toString());
