@@ -44,15 +44,14 @@ public class Model {
             
             if (employeeDAO.getCount()==0) {
 	            EmployeeBean employeebean = new EmployeeBean();
-	            employeebean.setAddrLine1("address1");
-	            employeebean.setAddrLine2("address2");
-	            employeebean.setCity("city");
-	            employeebean.setFirstName("firstname");
-	            employeebean.setLastName("lastname");
-	            employeebean.setPassword("password");
-	            employeebean.setState("state");
-	            employeebean.setUsername("username");
-	            employeebean.setZip("zip");
+	            employeebean.setAddrLine1("123 Main Street");
+	            employeebean.setCity("Pittsburgh");
+	            employeebean.setFirstName("Jane");
+	            employeebean.setLastName("Admin");
+	            employeebean.setPassword("admin");
+	            employeebean.setState("Pa");
+	            employeebean.setUsername("jadmin");
+	            employeebean.setZip("15143");
 	            employeeDAO.create(employeebean);
             }
             
