@@ -7,26 +7,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.genericdao.RollbackException;
-import org.genericdao.Transaction;
 
 import edu.cmu.JSON.MessageJSON;
 import edu.cmu.databean.CustomerBean;
-import edu.cmu.databean.EmployeeBean;
-import edu.cmu.databean.FundBean;
-import edu.cmu.databean.TransactionBean;
 import edu.cmu.formbean.DepositCheckFormBean;
 import edu.cmu.model.CustomerDAO;
-import edu.cmu.model.FundDAO;
 import edu.cmu.model.Model;
-import edu.cmu.model.TransactionDAO;
 
 public class DepositCheckAction {
 	private DepositCheckFormBean depositCheckFormBean;
-	private Model model;
 	
-	public DepositCheckAction(DepositCheckFormBean bean, Model model) {
+	public DepositCheckAction(DepositCheckFormBean bean) {
 		this.depositCheckFormBean = bean;
-		this.model = model;
 		
 	}
 
@@ -38,8 +30,7 @@ public class DepositCheckAction {
 		HttpSession session = request.getSession();
 		List<String> errors = new ArrayList<String>();
 		MessageJSON depositCheckMessage = new MessageJSON();
-		EmployeeBean user = (EmployeeBean) session.getAttribute("user");
-		CustomerDAO customerDAO = model.getCustomerDAO();
+		CustomerDAO customerDAO = Model.getCustomerDAO();
 		
     	// Checking if the user has logged in.
     	if (session.getAttribute("user") == null) {

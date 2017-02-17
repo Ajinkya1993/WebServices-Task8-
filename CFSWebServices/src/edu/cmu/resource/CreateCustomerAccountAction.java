@@ -20,9 +20,9 @@ public class CreateCustomerAccountAction {
 	private CustomerDAO customerDAO;
 	private EmployeeDAO employeeDAO;
 
-	public CreateCustomerAccountAction(Model model) {
-		customerDAO = model.getCustomerDAO();
-		employeeDAO = model.getEmployeeDAO();
+	public CreateCustomerAccountAction() {
+		customerDAO = Model.getCustomerDAO();
+		employeeDAO = Model.getEmployeeDAO();
 	}
 
 	public MessageJSON createAccount(String jsonString, HttpServletRequest request)

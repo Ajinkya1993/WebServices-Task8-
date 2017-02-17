@@ -1,15 +1,12 @@
 package edu.cmu.resource;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.genericdao.RollbackException;
-import org.genericdao.Transaction;
 
 import edu.cmu.JSON.MessageJSON;
 import edu.cmu.databean.CustomerBean;
@@ -20,24 +17,21 @@ import edu.cmu.model.CustomerDAO;
 import edu.cmu.model.FundDAO;
 import edu.cmu.model.Model;
 import edu.cmu.model.PositionDAO;
-import edu.cmu.model.TransactionDAO;
 
 public class BuyFundAction {
 	private BuyFundFormBean buyFundFormBean;
-	private Model model;
 
-	public BuyFundAction(BuyFundFormBean formbean, Model model) {
+	public BuyFundAction(BuyFundFormBean formbean) {
 		buyFundFormBean = formbean;
-		this.model = model;
 	}
 
 	public MessageJSON perform(HttpServletRequest request) throws RollbackException {
 		HttpSession session = request.getSession();
 		List<String> errors = new ArrayList<String>();
 		MessageJSON buyFundMessage = new MessageJSON();
-		CustomerDAO customerDAO = model.getCustomerDAO();
-		PositionDAO positionDAO = model.getPositionDAO();
-		FundDAO fundDAO = model.getFundDAO();
+		CustomerDAO customerDAO = Model.getCustomerDAO();
+		PositionDAO positionDAO = Model.getPositionDAO();
+		FundDAO fundDAO = Model.getFundDAO();
 
 		// Not logged in
 		if (session.getAttribute("user") == null) {

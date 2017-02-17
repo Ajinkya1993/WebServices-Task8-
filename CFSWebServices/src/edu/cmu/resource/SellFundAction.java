@@ -19,11 +19,9 @@ import edu.cmu.model.Model;
 
 public class SellFundAction {
 	private SellFundFormBean sellfundFormBean;
-	private Model model;
 	
-	public SellFundAction(SellFundFormBean bean, Model model) {
+	public SellFundAction(SellFundFormBean bean) {
 		this.sellfundFormBean = bean;
-		this.model = model;
 		}
 	
 	public MessageJSON perform (HttpServletRequest request) throws RollbackException {
@@ -31,9 +29,9 @@ public class SellFundAction {
 		HttpSession session = request.getSession();
 		List<String> errors = new ArrayList<String>();
 		MessageJSON message = new MessageJSON();
-  	    PositionDAO positionDAO = model.getPositionDAO();
-		CustomerDAO customerDAO = model.getCustomerDAO();
-		FundDAO fundDAO = model.getFundDAO();
+  	    PositionDAO positionDAO = Model.getPositionDAO();
+		CustomerDAO customerDAO = Model.getCustomerDAO();
+		FundDAO fundDAO = Model.getFundDAO();
 		
 	   	// Checking if the user has logged in.
     	if (session.getAttribute("user") == null) {
@@ -67,7 +65,7 @@ public class SellFundAction {
         	   positionDAO.update(positionBean);
         	   customerDAO.update(customerBean);
         	 } else {      	 
-        		 message = new MessageJSON("You don’t have that many shares in your portfolio");
+        		 message = new MessageJSON("You donï¿½t have that many shares in your portfolio");
         		 return message;
         	 }
 		

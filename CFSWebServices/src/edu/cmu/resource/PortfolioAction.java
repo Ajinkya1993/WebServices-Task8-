@@ -20,10 +20,10 @@ public class PortfolioAction {
 	private FundDAO fundDAO;
 	private PositionDAO positionDAO;
 	
-	public PortfolioAction(Model model) {
-		customerDAO = model.getCustomerDAO();
-		fundDAO = model.getFundDAO();
-		positionDAO = model.getPositionDAO();
+	public PortfolioAction() {
+		customerDAO = Model.getCustomerDAO();
+		fundDAO = Model.getFundDAO();
+		positionDAO = Model.getPositionDAO();
 	}
 	
 	public Portfolio getPortfolio(HttpServletRequest request) throws RollbackException, JSONException {
@@ -37,14 +37,14 @@ public class PortfolioAction {
 		String checkUser = (String) request.getSession(false).getAttribute("userType");
 		if (!checkUser.equals("customer")) {
 			Portfolio portfolio = new Portfolio();
-			portfolio.setMessage("You must be a customer to perform this action”");
+			portfolio.setMessage("You must be a customer to perform this actionï¿½");
 			return portfolio;
 		}
 		
 		PositionBean[] positions = positionDAO.getPositionsByCustomerId(customer.getCustomerId());
 		if(positions.length == 0) {
 			Portfolio portfolio = new Portfolio();
-			portfolio.setMessage("You don’t have any funds in your Portfolio");
+			portfolio.setMessage("You donï¿½t have any funds in your Portfolio");
 			return portfolio;
 		}
 		Portfolio portfolio = new Portfolio();

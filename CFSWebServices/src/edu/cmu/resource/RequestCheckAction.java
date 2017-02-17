@@ -16,18 +16,16 @@ import edu.cmu.model.Model;
 
 public class RequestCheckAction {
 	private RequestCheckFormBean requestCheckFormBean;
-	private Model model;
 	
-	public RequestCheckAction(RequestCheckFormBean bean, Model model) {
+	public RequestCheckAction(RequestCheckFormBean bean) {
 		this.requestCheckFormBean = bean;
-		this.model = model;
-		}
+	}
 	
 	public MessageJSON perform (HttpServletRequest request) throws RollbackException {
 		HttpSession session = request.getSession();
 		List<String> errors = new ArrayList<String>();
 		MessageJSON message = new MessageJSON();
-		CustomerDAO customerDAO = model.getCustomerDAO();
+		CustomerDAO customerDAO = Model.getCustomerDAO();
 
 		// Checking if the user has logged in.
     	if (session.getAttribute("user") == null) {

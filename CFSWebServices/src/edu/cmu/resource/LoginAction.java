@@ -19,11 +19,9 @@ import edu.cmu.model.Model;
 
 public class LoginAction {
 	private LoginFormBean loginFormBean;
-	private Model model;
 	
-	public LoginAction(LoginFormBean bean, Model model) {
+	public LoginAction(LoginFormBean bean) {
 		this.loginFormBean = bean;
-		this.model = model;
 		
 	}
 
@@ -44,8 +42,8 @@ public class LoginAction {
 			}
 			
 			// Checking if customer has logged in
-			CustomerDAO customerDAO = model.getCustomerDAO();
-			EmployeeDAO employeeDAO = model.getEmployeeDAO();
+			CustomerDAO customerDAO = Model.getCustomerDAO();
+			EmployeeDAO employeeDAO = Model.getEmployeeDAO();
 			CustomerBean customer = customerDAO.getCustomerByUserName(loginFormBean.getUsername());
 			if (customer != null) {
 				if (customer.getPassword().equals(loginFormBean.getPassword())) {
