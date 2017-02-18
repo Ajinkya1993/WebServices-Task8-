@@ -34,35 +34,35 @@ public class CreateAccountForm {
 		String passwordInput = jsonObject.getString("password");
 
 		if (firstNameInput != null) {
-			firstName = sanitize(firstNameInput).trim();
+			firstName = sanitize(firstNameInput);
 		}
 
 		if (lastNameInput != null) {
-			lastName = sanitize(lastNameInput).trim();
+			lastName = sanitize(lastNameInput);
 		}
 
 		if (addressInput != null) {
-			address = sanitize(addressInput).trim();
+			address = sanitize(addressInput);
 		}
 
 		if (cityInput != null) {
-			city = sanitize(cityInput).trim();
+			city = sanitize(cityInput);
 		}
 
 		if (stateInput != null) {
-			state = sanitize(stateInput).trim();
+			state = sanitize(stateInput);
 		}
 
 		if (zipCodeInput != null) {
-			zip = sanitize(zipCodeInput).trim();
+			zip = sanitize(zipCodeInput);
 		}
 
 		if (emailInput != null) {
-			email = sanitize(emailInput).trim();
+			email = sanitize(emailInput);
 		}
 
 		if (cashInput != null) {
-			checkCash = sanitize(cashInput).trim();
+			checkCash = sanitize(cashInput);
 			if (checkCashValue(checkCash)) {
 				cash = getCashAsDouble(cashInput);
 			}
@@ -74,11 +74,11 @@ public class CreateAccountForm {
 		}
 
 		if (userNameInput != null) {
-			userName = sanitize(userNameInput).trim();
+			userName = sanitize(userNameInput);
 		}
 
 		if (passwordInput != null) {
-			password = sanitize(passwordInput).trim();
+			password = sanitize(passwordInput);
 		}
 	}
 
@@ -188,73 +188,38 @@ public class CreateAccountForm {
 		if (firstName == null || firstName.length() == 0)
 			errors.add("The input you provided is not valid");
 
-		if (firstName != null && firstName.length() > 50) {
-			errors.add("The input you provided is not valid");
-		}
 
 		if (lastName == null || lastName.length() == 0)
 			errors.add("The input you provided is not valid");
 
-		if (lastName != null && lastName.length() > 50) {
-			errors.add("The input you provided is not valid");
-		}
 
 		if (address == null || address.length() == 0)
 			errors.add("The input you provided is not valid");
 
-		if (address != null && address.length() > 50) {
-			errors.add("The input you provided is not valid");
-		}
-
 		if (city == null || city.length() == 0)
 			errors.add("The input you provided is not valid");
 
-		if (city != null && city.length() > 50) {
-			errors.add("The input you provided is not valid");
-		}
 
 		if (state == null || state.length() == 0)
 			errors.add("The input you provided is not valid");
 
-		if (state != null && state.length() > 50) {
-			errors.add("State must be within 50 characters.");
-		}
 
 		if (zip == null || zip.length() == 0)
 			errors.add("The input you provided is not valid");
 
-		if (zip != null && zip.length() > 50) {
-			errors.add("The input you provided is not valid");
-		}
 
 		if (email == null || email.length() == 0)
 			errors.add("The input you provided is not valid");
 
-		if (email != null && email.length() > 50) {
-			errors.add("The input you provided is not valid");
-		}
-
 		if (checkCash != null && !checkCashValue(checkCash)) {
-			errors.add("The input you provided is not valid");
-		}
-
-		if (checkCash != null && checkCash.length() > 50) {
 			errors.add("The input you provided is not valid");
 		}
 
 		if (userName == null || userName.length() == 0)
 			errors.add("The input you provided is not valid");
 
-		if (userName != null && userName.length() > 50) {
-			errors.add("The input you provided is not valid");
-		}
-
 		if (password == null || password.length() == 0)
 			errors.add("The input you provided is not valid");
-
-		if (password != null && password.length() > 50) {
-			errors.add("The input you provided is not valid");
-		}
 
 		return errors;
 	}
