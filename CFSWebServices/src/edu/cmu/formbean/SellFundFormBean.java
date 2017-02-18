@@ -47,7 +47,7 @@ public class SellFundFormBean extends FormBean {
 		
 		try {
 			Double.parseDouble(numShares);
-			if (getSharesDouble() < 1 || getSharesDouble() > 1000000000) {
+			if (getSharesDouble() < 0) {
 				errors.add("The input you provided is not valid");
 			}
 		}
