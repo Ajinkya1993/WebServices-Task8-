@@ -18,7 +18,7 @@ import edu.cmu.resource.TransitionDayAction;
 public class TransitionDay {	
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
-	public MessageJSON login(@Context HttpServletRequest request, String jsonString, @Context Model model) throws ServletException, JSONException {
+	public MessageJSON transitionDay(@Context HttpServletRequest request, String jsonString) throws ServletException, JSONException {
 		try {
 			return new TransitionDayAction().perform(request);
 		} catch (Exception e){

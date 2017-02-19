@@ -65,7 +65,7 @@ public class SellFundAction {
         	   positionDAO.update(positionBean);
         	   customerDAO.update(customerBean);
         	 } else {      	 
-        		 message = new MessageJSON("You don�t have that many shares in your portfolio");
+        		 message = new MessageJSON("You don't have that many shares in your portfolio");
         		 return message;
         	 }
 		

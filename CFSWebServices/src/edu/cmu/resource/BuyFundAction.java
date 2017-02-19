@@ -64,7 +64,7 @@ public class BuyFundAction {
 					return buyFundMessage;
 				}
 
-				if (currentBalance - buyAmount <= 0) {
+				if (currentBalance - buyAmount < 0) {
 					buyFundMessage = new MessageJSON(
 							"You don't have enough cash in your account to make this purchase");
 					return buyFundMessage;

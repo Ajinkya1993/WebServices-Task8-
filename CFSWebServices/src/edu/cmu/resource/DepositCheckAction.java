@@ -6,12 +6,14 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.genericdao.MatchArg;
 import org.genericdao.RollbackException;
 
 import edu.cmu.JSON.MessageJSON;
 import edu.cmu.databean.CustomerBean;
 import edu.cmu.formbean.DepositCheckFormBean;
 import edu.cmu.model.CustomerDAO;
+import edu.cmu.model.EmployeeDAO;
 import edu.cmu.model.Model;
 
 public class DepositCheckAction {
@@ -31,6 +33,7 @@ public class DepositCheckAction {
 		List<String> errors = new ArrayList<String>();
 		MessageJSON depositCheckMessage = new MessageJSON();
 		CustomerDAO customerDAO = Model.getCustomerDAO();
+		EmployeeDAO employeeDAO = Model.getEmployeeDAO();
 		
     	// Checking if the user has logged in.
     	if (session.getAttribute("user") == null) {
@@ -38,10 +41,16 @@ public class DepositCheckAction {
             return depositCheckMessage;
         }
 		
-		// Check if the user is an employee
+		// Check if the logged in user is an employee
         if (!session.getAttribute("userType").equals("employee")) {
         	depositCheckMessage = new MessageJSON("You must be an employee to perform this action");
             return depositCheckMessage;
+        }
+        
+        // Check the target user is an employee
+        if (employeeDAO.match(MatchArg.equals("username", depositCheckFormBean.getUsername())).length > 0) {
+        	depositCheckMessage = new MessageJSON("The input you provided is not valid");
+        	return depositCheckMessage;
         }
         
         // normal validation check

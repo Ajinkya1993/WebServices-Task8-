@@ -46,7 +46,7 @@ public class BuyFundFormBean {
 		}
 		try {
 			Double.parseDouble(cashValue);
-			if (getCashDouble() < 1 || getCashDouble() > 1000000000) {
+			if (getCashDouble() <= 0 || getCashDouble() > 1000000000) {
 				errors.add("The input you provided is not valid");
 
 			}

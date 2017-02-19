@@ -22,15 +22,16 @@ public class CreateFund {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	public MessageJSON login(@Context HttpServletRequest request, String jsonString, @Context Model model) throws ServletException, JSONException, RollbackException {
+
 		try {
 			JSONObject obj = new JSONObject (jsonString);
 			CreateFundFormBean createFundFormBean = new CreateFundFormBean(obj.getString("name"), obj.getString("symbol"), obj.getString("initial_value"));
 			return new CreateFundAction(createFundFormBean).perform(request);
 			
-		} /*catch (Exception e){
+		} catch (Exception e){
 			MessageJSON loginJSON = new MessageJSON("The input you provided is not valid");
 			return loginJSON;
-		} */
+		} 
 		 finally {
 			 //do nothing
 		 }

@@ -21,7 +21,7 @@ import edu.cmu.resource.RequestCheckAction;
 public class RequestCheck {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
-	public MessageJSON login(@Context HttpServletRequest request, String jsonString, @Context Model model) throws ServletException, JSONException {
+	public MessageJSON requestCheck(@Context HttpServletRequest request, String jsonString) throws ServletException, JSONException {
 		try {
 			
 			JSONObject obj = new JSONObject (jsonString);
