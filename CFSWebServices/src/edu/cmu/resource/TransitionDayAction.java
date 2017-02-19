@@ -44,7 +44,7 @@ public class TransitionDayAction {
 	        Transaction.begin();
 	        FundBean[] fundList = fundDAO.match();
 	        if (fundList == null || fundList.length == 0) {
-	        	transitionDayMessage = new MessageJSON("The fund was prices have been successfully recalculated");
+	        	transitionDayMessage = new MessageJSON("The fund prices have been successfully recalculated");
 	        	return transitionDayMessage;
 	        }
 	        
@@ -55,14 +55,14 @@ public class TransitionDayAction {
 	        }
 		    Transaction.commit();
         } catch (Exception e) {
-        	transitionDayMessage = new MessageJSON("�The input you provided is not valid");
+        	transitionDayMessage = new MessageJSON("The input you provided is not valid");
         	return transitionDayMessage;
         } finally {
         	if (Transaction.isActive()) {
         		Transaction.rollback();
         	}
         }
-        transitionDayMessage = new MessageJSON("The fund was prices have been successfully recalculated");
+        transitionDayMessage = new MessageJSON("The fund prices have been successfully recalculated");
         return transitionDayMessage;
 	}
 
