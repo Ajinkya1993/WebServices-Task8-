@@ -50,8 +50,10 @@ public class Portfolio {
 			FundObject fund = new FundObject();
 			FundBean fundBean = fundDAO.read(positionBean.getFundId());
 			fund.setName(fundBean.getName());
-			fund.setShares(String.valueOf(positionBean.getShares()));
-			fund.setPrice(String.valueOf(fundBean.getPrice()));
+			double shares = positionBean.getShares();
+			fund.setShares(String.format("%.0f", shares));
+			double prices = fundBean.getPrice();
+			fund.setPrice(String.format("%.2f", prices));
 			fundsArray.add(fund);
 		}
 		
