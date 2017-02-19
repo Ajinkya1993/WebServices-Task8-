@@ -20,7 +20,7 @@ import edu.cmu.resource.BuyFundAction;
 public class BuyFund {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
-	public MessageJSON login(@Context HttpServletRequest request, String jsonString, @Context Model model)
+	public MessageJSON buyFund(@Context HttpServletRequest request, String jsonString)
 			throws ServletException, JSONException {
 
 		try {

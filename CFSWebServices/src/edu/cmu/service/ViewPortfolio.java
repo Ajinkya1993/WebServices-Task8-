@@ -18,7 +18,7 @@ import edu.cmu.resource.PortfolioAction;
 public class ViewPortfolio {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Portfolio getPortfolioDetails(@Context HttpServletRequest request, @Context Model model) throws ServletException, RollbackException, JSONException {
+	public Portfolio getPortfolioDetails(@Context HttpServletRequest request) throws ServletException, RollbackException, JSONException {
 		PortfolioAction portfolio = new PortfolioAction();
 		return portfolio.getPortfolio(request);
 	}

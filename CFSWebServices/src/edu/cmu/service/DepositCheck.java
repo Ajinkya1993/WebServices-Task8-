@@ -19,7 +19,7 @@ import edu.cmu.resource.DepositCheckAction;
 public class DepositCheck {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
-	public MessageJSON login(@Context HttpServletRequest request, String jsonString) throws ServletException, JSONException {
+	public MessageJSON depositCheck(@Context HttpServletRequest request, String jsonString) throws ServletException, JSONException {
 		try {
 			
 			JSONObject obj = new JSONObject (jsonString);

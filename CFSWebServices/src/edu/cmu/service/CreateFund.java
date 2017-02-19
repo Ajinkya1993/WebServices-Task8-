@@ -20,7 +20,7 @@ import edu.cmu.resource.CreateFundAction;
 public class CreateFund {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
-	public MessageJSON login(@Context HttpServletRequest request, String jsonString, @Context Model model) throws ServletException, JSONException {
+	public MessageJSON createFund(@Context HttpServletRequest request, String jsonString) throws ServletException, JSONException {
 		try {
 			JSONObject obj = new JSONObject (jsonString);
 			CreateFundFormBean createFundFormBean = new CreateFundFormBean(obj.getString("name"), obj.getString("symbol"), obj.getString("initial_value"));

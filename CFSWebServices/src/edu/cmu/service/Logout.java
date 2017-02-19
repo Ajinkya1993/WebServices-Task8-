@@ -14,7 +14,7 @@ import edu.cmu.resource.LogoutAction;
 public class Logout {	
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
-	public MessageJSON login(@Context HttpServletRequest request) {
+	public MessageJSON logout(@Context HttpServletRequest request) {
 		try {
 			return new LogoutAction().perform(request);
 		} catch (Exception e) {

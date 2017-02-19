@@ -17,7 +17,7 @@ import edu.cmu.resource.CreateCustomerAccountAction;
 public class CreateCustomerAccount {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
-	public MessageJSON createNewCustomerAccount(@Context HttpServletRequest request, String jsonString, @Context Model model)
+	public MessageJSON createNewCustomerAccount(@Context HttpServletRequest request, String jsonString)
 			throws JSONException, ServletException, RollbackException {
 		try {
 			CreateCustomerAccountAction createAccountObject = new CreateCustomerAccountAction();
