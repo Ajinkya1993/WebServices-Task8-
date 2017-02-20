@@ -20,9 +20,9 @@ public class FundDAO extends GenericDAO<FundBean>{
     	try {
     		Transaction.begin();
     		FundBean funds[] = match(MatchArg.equals("name", bean.getName()));
-    		if (funds != null && funds.length > 0) {
-        		throw new RollbackException ("Fund name already exists");
-        	}
+    		if(funds != null && funds.length > 0) {
+    			throw new RollbackException ("Fund name already exists");
+    		}
     		FundBean funds2[] = match(MatchArg.equals("symbol", bean.getSymbol()));
     		if (funds2 != null && funds2.length > 0) {
     			throw new RollbackException ("Fund symbol already exists");
