@@ -10,7 +10,7 @@ public class CreateFundFormBean {
 	private String symbol;
 	private String initial_value;
 	public CreateFundFormBean(String name, String symbol, String iv) {
-		this.name = sanitize(name);
+		this.name = name;
 		this.symbol = symbol;
 		this.initial_value = iv;
 	}
@@ -65,41 +65,6 @@ public class CreateFundFormBean {
 		}
 
 		return errors;
-	}
-	
-	public String sanitize(String input) {
-		if (input == null || input.length() == 0) {
-			return input;
-		}
-		Pattern pattern = Pattern.compile("[<>\"&]");
-		Matcher matcher = pattern.matcher(input);
-		StringBuffer sb = null;
-		while (matcher.find()) {
-			if (sb == null) {
-				sb = new StringBuffer();
-			}
-			switch (input.charAt(matcher.start())) {
-			case '<':
-				matcher.appendReplacement(sb, "&lt;");
-				break;
-			case '>':
-				matcher.appendReplacement(sb, "&gt;");
-				break;
-			case '&':
-				matcher.appendReplacement(sb, "&amp;");
-				break;
-			case '"':
-				matcher.appendReplacement(sb, "&quot;");
-				break;
-			default:
-				matcher.appendReplacement(sb, "&#" + ((int) input.charAt(matcher.start())) + ';');
-			}
-		}
-
-		if (sb == null)
-			return input;
-		matcher.appendTail(sb);
-		return sb.toString();
 	}
 
 }
