@@ -22,74 +22,71 @@ public class CreateAccountForm {
 	private String password;
 
 	public CreateAccountForm(JSONObject jsonObject) throws JSONException {
-		String firstNameInput = jsonObject.getString("fname");
-		String lastNameInput = jsonObject.getString("lname");
-		String addressInput = jsonObject.getString("address");
-		String cityInput = jsonObject.getString("city");
-		String stateInput = jsonObject.getString("state");
-		String zipCodeInput = jsonObject.getString("zip");
-		String emailInput = jsonObject.getString("email");
+		firstName = jsonObject.getString("fname");
+		lastName = jsonObject.getString("lname");
+		address = jsonObject.getString("address");
+		city = jsonObject.getString("city");
+		state = jsonObject.getString("state");
+		zip = jsonObject.getString("zip");
+		email = jsonObject.getString("email");
 		String cashInput = jsonObject.getString("cash");
-		String userNameInput = jsonObject.getString("username");
-		String passwordInput = jsonObject.getString("password");
+		userName = jsonObject.getString("username");
+		password = jsonObject.getString("password");
 
-		if (firstNameInput != null) {
-			firstName = sanitize(firstNameInput);
-		}
-
-		if (lastNameInput != null) {
-			lastName = sanitize(lastNameInput);
-		}
-
-		if (addressInput != null) {
-			address = sanitize(addressInput);
-		}
-
-		if (cityInput != null) {
-			city = sanitize(cityInput);
-		}
-
-		if (stateInput != null) {
-			state = sanitize(stateInput);
-		}
-
-		if (zipCodeInput != null) {
-			zip = sanitize(zipCodeInput);
-		}
-
-		if (emailInput != null) {
-			email = sanitize(emailInput);
-		}
+		// if (firstNameInput != null) {
+		// firstName = sanitize(firstNameInput);
+		// }
+		//
+		// if (lastNameInput != null) {
+		// lastName = sanitize(lastNameInput);
+		// }
+		//
+		// if (addressInput != null) {
+		// address = sanitize(addressInput);
+		// }
+		//
+		// if (cityInput != null) {
+		// city = sanitize(cityInput);
+		// }
+		//
+		// if (stateInput != null) {
+		// state = sanitize(stateInput);
+		// }
+		//
+		// if (zipCodeInput != null) {
+		// zip = sanitize(zipCodeInput);
+		// }
+		//
+		// if (emailInput != null) {
+		// email = sanitize(emailInput);
+		// }
 
 		if (cashInput != null) {
 			checkCash = sanitize(cashInput);
 			if (checkCashValue(checkCash)) {
 				cash = getCashAsDouble(cashInput);
 			}
-			else {
-				cash = 0d;
-			}
 		} else {
 			cash = 0d;
 		}
 
-		if (userNameInput != null) {
-			userName = sanitize(userNameInput);
-		}
-
-		if (passwordInput != null) {
-			password = sanitize(passwordInput);
-		}
+		// if (userNameInput != null) {
+		// userName = sanitize(userNameInput);
+		// }
+		//
+		// if (passwordInput != null) {
+		// password = sanitize(passwordInput);
+		// }
 	}
 
 	private boolean checkCashValue(String cashInput) {
 		try {
 			Double.parseDouble(cashInput);
-			if(cashInput.equals("0")) {
-				return true;
-			}
-			if (getCashAsDouble(cashInput) < 1 || getCashAsDouble(cashInput) > 10000000) {
-				System.out.println("Inside here");
+			// if (cashInput.equals("0") || cashInput.equals("0.0") ||
+			// cashInput.equals("0.00")) {
+			// return true;
+			// }
+			if (getCashAsDouble(cashInput) < 0 || getCashAsDouble(cashInput) > 100000000) {
 				return false;
 			}
 		} catch (NumberFormatException e) {
@@ -188,10 +185,8 @@ public class CreateAccountForm {
 		if (firstName == null || firstName.length() == 0)
 			errors.add("The input you provided is not valid");
 
-
 		if (lastName == null || lastName.length() == 0)
 			errors.add("The input you provided is not valid");
-
 
 		if (address == null || address.length() == 0)
 			errors.add("The input you provided is not valid");
@@ -199,14 +194,11 @@ public class CreateAccountForm {
 		if (city == null || city.length() == 0)
 			errors.add("The input you provided is not valid");
 
-
 		if (state == null || state.length() == 0)
 			errors.add("The input you provided is not valid");
 
-
 		if (zip == null || zip.length() == 0)
 			errors.add("The input you provided is not valid");
-
 
 		if (email == null || email.length() == 0)
 			errors.add("The input you provided is not valid");

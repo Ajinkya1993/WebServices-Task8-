@@ -10,7 +10,6 @@ import javax.ws.rs.core.MediaType;
 import org.genericdao.RollbackException;
 import org.json.JSONException;
 import edu.cmu.JSON.MessageJSON;
-import edu.cmu.model.Model;
 import edu.cmu.resource.CreateCustomerAccountAction;
 
 @Path("/createCustomerAccount")
@@ -22,8 +21,14 @@ public class CreateCustomerAccount {
 		try {
 			CreateCustomerAccountAction createAccountObject = new CreateCustomerAccountAction();
 			return createAccountObject.createAccount(jsonString, request);
-		} catch (Exception e) {
-			return new MessageJSON("The input you provided is not valid"); 
+		} catch (JSONException e) {
+			return new MessageJSON("The input you provided is not valid");
+		} catch (RollbackException e) {
+			return new MessageJSON("The input you provided is not valid");
+		}
+
+		catch (Exception e) {
+			return new MessageJSON("You must be an employee to perform this action");
 		}
 	}
 }
