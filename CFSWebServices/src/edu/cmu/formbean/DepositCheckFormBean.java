@@ -37,7 +37,7 @@ public class DepositCheckFormBean {
 		List<String> errors = new ArrayList<String>();
 		
 		if (getUsername() == null || getUsername().trim().length() == 0) {
-            errors.add("Username is required");
+            errors.add("The input you provided is not valid");
             return errors;
         }
 
