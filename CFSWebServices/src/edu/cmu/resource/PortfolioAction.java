@@ -40,6 +40,7 @@ public class PortfolioAction {
 		CustomerBean customer = (CustomerBean) session.getAttribute("user");	
 
 		PositionBean[] positions = positionDAO.getPositionsByCustomerId(customer.getCustomerId());
+		
 		if (positions.length == 0) {
 			Portfolio portfolio = new Portfolio();
 			portfolio.setMessage("You don't have any funds in your Portfolio");

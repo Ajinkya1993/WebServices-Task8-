@@ -66,7 +66,7 @@ public class TransitionDayAction {
         		Transaction.rollback();
         	}
         }
-        transitionDayMessage = new MessageJSON("The fund was prices have been successfully recalculated");
+        transitionDayMessage = new MessageJSON("The fund prices have been successfully recalculated");
         return transitionDayMessage;
 	}
 
