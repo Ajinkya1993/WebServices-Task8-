@@ -59,17 +59,17 @@ public class BuyFundAction {
 				double buyAmount = buyFundFormBean.getCashDouble();
 				int shares = (int) (Math.min(currentBalance, buyAmount) / price);
 
+				if (currentBalance - buyAmount < 0) {
+					buyFundMessage = new MessageJSON("You don't have enough cash in your account to make this purchase");
+					return buyFundMessage;
+					
+				}
+				
 				if (shares < 1) {
 					buyFundMessage = new MessageJSON("You didn't provide enough cash to make this purchase");
 					return buyFundMessage;
 				}
 
-				if (currentBalance - buyAmount < 0) {
-					buyFundMessage = new MessageJSON(
-							"You don't have enough cash in your account to make this purchase");
-					return buyFundMessage;
-
-				}
 				// Validation errors check
 				errors = buyFundFormBean.getValidationErrors();
 				if (errors.size() > 0) {

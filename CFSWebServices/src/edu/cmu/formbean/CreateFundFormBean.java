@@ -2,6 +2,7 @@ package edu.cmu.formbean;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CreateFundFormBean {
@@ -65,15 +66,5 @@ public class CreateFundFormBean {
 
 		return errors;
 	}
-	
-	public String checkStringFormat (String str) {
-    	Pattern format = Pattern.compile("[^<>;\":]*");
-        Boolean rightFormat = format.matcher(str).matches();
-        if (!rightFormat) {
-            return "should not contain angle brackets, colon or quotes";
-        } else {
-            return "";
-        }
-    }
 
 }

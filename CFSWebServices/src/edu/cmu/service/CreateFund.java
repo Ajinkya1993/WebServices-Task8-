@@ -8,7 +8,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
-import org.genericdao.RollbackException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -21,8 +20,7 @@ import edu.cmu.resource.CreateFundAction;
 public class CreateFund {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
-	public MessageJSON login(@Context HttpServletRequest request, String jsonString, @Context Model model) throws ServletException, JSONException, RollbackException {
-
+	public MessageJSON createFund(@Context HttpServletRequest request, String jsonString) throws ServletException, JSONException {
 		try {
 			JSONObject obj = new JSONObject (jsonString);
 			CreateFundFormBean createFundFormBean = new CreateFundFormBean(obj.getString("name"), obj.getString("symbol"), obj.getString("initial_value"));
@@ -32,8 +30,5 @@ public class CreateFund {
 			MessageJSON loginJSON = new MessageJSON("The input you provided is not valid");
 			return loginJSON;
 		} 
-		 finally {
-			 //do nothing
-		 }
 	}
 }

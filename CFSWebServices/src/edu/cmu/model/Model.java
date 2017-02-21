@@ -55,6 +55,20 @@ public class Model {
 	            employeeDAO.create(employeebean);
             }
             
+            if (customerDAO.getCount()==0) {
+	            CustomerBean customerbean = new CustomerBean();
+	            customerbean.setAddress("address1");
+	            customerbean.setCity("city");
+	            customerbean.setFirstName("cus-0");
+	            customerbean.setLastName("lastname");
+	            customerbean.setPassword("password");
+	            customerbean.setState("state");
+	            customerbean.setUsername("customer");
+	            customerbean.setZip("zip");
+	            customerbean.setCash(1000);
+	            customerDAO.create(customerbean);
+            }
+            
         } catch (DAOException e) {
             throw new ServletException(e);
         } catch (RollbackException f) {

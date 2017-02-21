@@ -2,7 +2,6 @@ package edu.cmu.service;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.transaction.RollbackException;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -18,7 +17,7 @@ import edu.cmu.resource.LoginAction;
 public class Login {	
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
-	public MessageJSON login(@Context HttpServletRequest request, String jsonString) throws ServletException, JSONException, RollbackException {
+	public MessageJSON login(@Context HttpServletRequest request, String jsonString) throws ServletException, JSONException {
 		try {
 			
 			JSONObject obj = new JSONObject (jsonString);
@@ -29,8 +28,5 @@ public class Login {
 			MessageJSON loginJSON = new MessageJSON("There seems to be an issue with the username/password combination that you entered");
 			return loginJSON;
 		} 
-			finally {
-				//do  nothing
-			}
 	} 
 }

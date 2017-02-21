@@ -1,8 +1,5 @@
 package edu.cmu.resource;
 
-
-
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -27,7 +24,7 @@ public class PortfolioAction {
 
 	public Portfolio getPortfolio(HttpServletRequest request) throws RollbackException, JSONException {
 		HttpSession session = request.getSession();
-		if(session.getAttribute("user") == null) {
+		if (session.getAttribute("user") == null) {
 			Portfolio portfolio = new Portfolio();
 			portfolio.setMessage("You are not currently logged in");
 			return portfolio;
@@ -45,7 +42,7 @@ public class PortfolioAction {
 		PositionBean[] positions = positionDAO.getPositionsByCustomerId(customer.getCustomerId());
 		if (positions.length == 0) {
 			Portfolio portfolio = new Portfolio();
-			portfolio.setMessage("You don’t have any funds in your Portfolio");
+			portfolio.setMessage("You don't have any funds in your Portfolio");
 			return portfolio;
 		}
 		Portfolio portfolio = new Portfolio();

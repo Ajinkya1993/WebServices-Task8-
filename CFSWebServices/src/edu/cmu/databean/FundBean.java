@@ -46,12 +46,10 @@ public class FundBean {
 		this.date = date;
 	}
 	
-	@MaxSize(50)
 	public void setName(String s) {
 		name = s;
 	}
 
-	@MaxSize(50)
 	public void setSymbol(String s) {
 		symbol = s;
 	}

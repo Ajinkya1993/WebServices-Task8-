@@ -52,8 +52,7 @@ public class Portfolio {
 			fund.setName(fundBean.getName());
 			double shares = positionBean.getShares();
 			fund.setShares(String.format("%.0f", shares));
-			double prices = fundBean.getPrice();
-			fund.setPrice(String.format("%.2f", prices));
+			fund.setPrice(String.format("%.2f", fundBean.getPrice()));
 			fundsArray.add(fund);
 		}
 		
