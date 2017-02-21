@@ -36,7 +36,7 @@ public class TransitionDayAction {
         }
     	
     	// Check if the user is an employee
-        if (!(session.getAttribute("userType") != null) && session.getAttribute("userType").equals("employee")) {
+        if ((session.getAttribute("userType") != null) && session.getAttribute("userType").equals("customer")) {
         	transitionDayMessage = new MessageJSON("You must be an employee to perform this action");
             return transitionDayMessage;
         }
