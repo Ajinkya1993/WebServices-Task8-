@@ -24,8 +24,8 @@ public class SellFundFormBean extends FormBean {
     	this.numShares = numShares;
     }
 	
-	public double getSharesDouble() {
-		return Double.parseDouble(numShares);
+	public double getSharesInteger() {
+		return Integer.parseInt(numShares);
 	}
 	public void setNumShares(String numShares) {
 		this.numShares = numShares.trim();
@@ -46,8 +46,8 @@ public class SellFundFormBean extends FormBean {
 		}
 		
 		try {
-			Double.parseDouble(numShares);
-			if (getSharesDouble() < 0) {
+			Integer.parseInt(numShares);
+			if (getSharesInteger() < 0) {
 				errors.add("The input you provided is not valid");
 			}
 		}

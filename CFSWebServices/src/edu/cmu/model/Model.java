@@ -2,21 +2,15 @@
 package edu.cmu.model;
 
 
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 
 import org.genericdao.ConnectionPool;
 import org.genericdao.DAOException;
-import org.genericdao.MatchArg;
 import org.genericdao.RollbackException;
 import org.genericdao.Transaction;
 
 import edu.cmu.databean.CustomerBean;
 import edu.cmu.databean.EmployeeBean;
-import edu.cmu.databean.FundBean;
-import edu.cmu.databean.FundPriceHistoryBean;
-import edu.cmu.databean.PositionBean;
-import edu.cmu.databean.TransactionBean;
 
 public class Model {
 	

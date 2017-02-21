@@ -57,11 +57,11 @@ public class SellFundAction {
            int fundid = fundDAO.read(sellfundFormBean.getsymbol()).getFundId();
            double shares = positionDAO.getPosition(user.getCustomerId(), fundid).getShares();
     	   double price = fundDAO.read(sellfundFormBean.getsymbol()).getPrice();
-           if (sellfundFormBean.getSharesDouble() <= shares) {
+           if (sellfundFormBean.getSharesInteger() <= shares) {
         	   PositionBean positionBean = positionDAO.getPosition(user.getCustomerId(), fundid);
         	   CustomerBean customerBean = customerDAO.getCustomerByUserName(user.getUsername());
-        	   positionBean.setShares(shares - sellfundFormBean.getSharesDouble());
-        	   customerBean.setCash(customerBean.getCash() + sellfundFormBean.getSharesDouble() * price);
+        	   positionBean.setShares(shares - sellfundFormBean.getSharesInteger());
+        	   customerBean.setCash(customerBean.getCash() + sellfundFormBean.getSharesInteger() * price);
         	   positionDAO.update(positionBean);
         	   customerDAO.update(customerBean);
         	 } else {      	 

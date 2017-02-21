@@ -1,7 +1,5 @@
 package edu.cmu.model;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import org.genericdao.ConnectionPool;
@@ -11,7 +9,6 @@ import org.genericdao.MatchArg;
 import org.genericdao.RollbackException;
 import org.genericdao.Transaction;
 
-import edu.cmu.databean.FundPriceHistoryBean;
 import edu.cmu.databean.TransactionBean;
 
 public class TransactionDAO extends GenericDAO<TransactionBean>{

@@ -8,7 +8,6 @@ import org.genericdao.RollbackException;
 import org.genericdao.Transaction;
 
 import edu.cmu.databean.FundBean;
-import edu.cmu.databean.FundPriceHistoryBean;
 
 public class FundDAO extends GenericDAO<FundBean>{
 	public FundDAO(ConnectionPool cp, String tableName) throws DAOException {

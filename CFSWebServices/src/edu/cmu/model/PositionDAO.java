@@ -2,6 +2,9 @@ package edu.cmu.model;
 
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.genericdao.ConnectionPool;
 import org.genericdao.DAOException;
 import org.genericdao.GenericDAO;
@@ -47,7 +50,12 @@ public class PositionDAO extends GenericDAO<PositionBean>{
 	    
 	    public PositionBean[] getPositionsByCustomerId(int customerId)  throws RollbackException{	        	
 	    	PositionBean[] beans = match((MatchArg.equals("customerId", customerId)));
-	        return beans;
+	    	List<PositionBean> list = new ArrayList<PositionBean>();
+	    	for (int i = 0; i < beans.length; i++) {
+				if(beans[i].getShares() != 0) list.add(beans[i]);
+			}
+	    	PositionBean[] ret = list.toArray(new PositionBean[list.size()]);
+	        return ret;
 	    }
 	    
 	    public PositionBean[] getPositionsByFundId(int fundId)  throws RollbackException{	        	

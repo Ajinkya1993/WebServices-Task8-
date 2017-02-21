@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import javax.ws.rs.FormParam;
-
 public class LoginFormBean {
 	private String username;
 	private String password;
