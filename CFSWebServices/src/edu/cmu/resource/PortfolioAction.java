@@ -9,6 +9,7 @@ import edu.cmu.databean.CustomerBean;
 import edu.cmu.databean.FundObject;
 import edu.cmu.databean.Portfolio;
 import edu.cmu.databean.PositionBean;
+import edu.cmu.model.CustomerDAO;
 import edu.cmu.model.FundDAO;
 import edu.cmu.model.Model;
 import edu.cmu.model.PositionDAO;
@@ -16,10 +17,12 @@ import edu.cmu.model.PositionDAO;
 public class PortfolioAction {
 	private FundDAO fundDAO;
 	private PositionDAO positionDAO;
+	private CustomerDAO customerDAO;
 
 	public PortfolioAction() {
 		fundDAO = Model.getFundDAO();
 		positionDAO = Model.getPositionDAO();
+		customerDAO = Model.getCustomerDAO();
 	}
 
 	public Portfolio getPortfolio(HttpServletRequest request) throws RollbackException, JSONException {
@@ -37,7 +40,8 @@ public class PortfolioAction {
 			return portfolio;
 		}
 
-		CustomerBean customer = (CustomerBean) session.getAttribute("user");	
+		CustomerBean user = (CustomerBean) session.getAttribute("user");
+		CustomerBean customer = customerDAO.getCustomerByUserName(user.getUsername());
 
 		PositionBean[] positions = positionDAO.getPositionsByCustomerId(customer.getCustomerId());
 		
@@ -48,12 +52,9 @@ public class PortfolioAction {
 		}
 		Portfolio portfolio = new Portfolio();
 		double cash = customer.getCash();
-//		System.out.println(cash);
-//		DecimalFormat decimalFormat = new DecimalFormat("##.00");
 		portfolio.setCash(String.format("%.2f", cash));
 		portfolio.setMessage("The action was successful");
 		FundObject[] funds = portfolio.getCustomerDetails(positions, fundDAO);
-		// System.out.println(jsonArray.toString());
 		portfolio.setFunds(funds);
 		return portfolio;
 	}

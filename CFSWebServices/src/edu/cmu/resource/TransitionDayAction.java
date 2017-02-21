@@ -59,7 +59,7 @@ public class TransitionDayAction {
 	        }
 		    Transaction.commit();
         } catch (Exception e) {
-        	transitionDayMessage = new MessageJSON("The input you provided is not valid");
+        	transitionDayMessage = new MessageJSON("�The input you provided is not valid");
         	return transitionDayMessage;
         } finally {
         	if (Transaction.isActive()) {
