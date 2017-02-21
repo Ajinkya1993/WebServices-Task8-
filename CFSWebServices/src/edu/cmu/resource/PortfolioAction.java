@@ -40,7 +40,8 @@ public class PortfolioAction {
 			return portfolio;
 		}
 
-		CustomerBean customer = (CustomerBean) session.getAttribute("user");	
+		CustomerBean user = (CustomerBean) session.getAttribute("user");
+		CustomerBean customer = customerDAO.getCustomerByUserName(user.getUsername());
 
 		PositionBean[] positions = positionDAO.getPositionsByCustomerId(customer.getCustomerId());
 		if (positions.length == 0) {
@@ -49,13 +50,10 @@ public class PortfolioAction {
 			return portfolio;
 		}
 		Portfolio portfolio = new Portfolio();
-		double cash = customerDAO.getCustomerByUserName(customer.getUsername()).getCash();
-//		System.out.println(cash);
-//		DecimalFormat decimalFormat = new DecimalFormat("##.00");
+		double cash = customer.getCash();
 		portfolio.setCash(String.format("%.2f", cash));
 		portfolio.setMessage("The action was successful");
 		FundObject[] funds = portfolio.getCustomerDetails(positions, fundDAO);
-		// System.out.println(jsonArray.toString());
 		portfolio.setFunds(funds);
 		return portfolio;
 	}
